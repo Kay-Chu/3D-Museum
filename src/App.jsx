@@ -1,8 +1,9 @@
-import Hero from "./components/Hero"
-import Who from "./components/Who"
-import Works from "./components/Works"
-import Contact from "./components/Contact"
-import styled from "styled-components"
+import Navbar from "./components/Navbar"
+import Home1 from "./components/Index/Home1"
+import Antique from "./components/Index/Antique";
+import Who from "./components/Index/Who"
+import styled from "styled-components";
+import "../index.css"
 
 const Container = styled.div`
   height: 100vh;
@@ -17,14 +18,14 @@ const Container = styled.div`
   }
 `;
 
-function App() {
+const App = () => {
 
   return (
     <Container>
-      <Hero />
+      
+      <Home1 />
+      <Antique />
       <Who />
-      <Works />
-      <Contact />
     </Container>
   )
 }

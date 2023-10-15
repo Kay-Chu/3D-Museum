@@ -2,8 +2,10 @@ import React from 'react';
 import styled from 'styled-components';
 
 const Section = styled.div`
+  height: 10vh;
   display: flex;
   justify-content: center;
+  position: relative;
 `
 
 const Container = styled.div`
@@ -40,13 +42,6 @@ const Icon = styled.img`
     cursor: pointer;
 `
 const Button = styled.button`
-    width: 100px;
-    padding: 10px;
-    background-color: #da4ea2;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
 `
 
 
@@ -65,7 +60,7 @@ const Navbar = () => {
                 </Links>
                 <Icons>
                     <Icon src="./img/search.png" />
-                    <Button>Hire Now</Button>
+                    <Button className='button'>Hire Now</Button>
                 </Icons>
             </Container>
         </Section>
