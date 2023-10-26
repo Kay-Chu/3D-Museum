@@ -1,18 +1,19 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Canvas } from "@react-three/fiber";
-import Cube from "./Cube";
 import { OrbitControls} from "@react-three/drei";
+import Cube from "./Cube";
+
 
 const Section = styled.div`
   height: 100vh;
-  scroll-snap-align: center;
+  // scroll-snap-align: center;
   display: flex;
   justify-content: center;
 `
 const Container = styled.div`
   height: 100vh;
-  scroll-snap-align: center;
+  // scroll-snap-align: center;
   width: 1400px;
   display: flex;
   justify-content: space-between;

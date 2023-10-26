@@ -6,7 +6,7 @@ import Chair from "./Chair";
 const WebDesign = () => {
   return (
     <Canvas>
-      <Stage environment="city" intensity={0.1}>
+      <Stage environment="city" >
 
         <Chair />
       </Stage>

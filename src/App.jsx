@@ -1,8 +1,13 @@
 import Navbar from "./components/Navbar"
 import Home1 from "./components/Index/Home1"
-import Antique from "./components/Index/Antique";
 import Who from "./components/Index/Who"
+import Works from "./components/Index/Works"
+import Antique from "./components/Index/Antique"
 import styled from "styled-components";
+import WebgiViewer from "./components/Index/WebgiViewer"
+
+
+
 import "../index.css"
 
 const Container = styled.div`
@@ -11,22 +16,34 @@ const Container = styled.div`
   scroll-behavior: smooth;
   overflow-y: auto;
   color: white;
-  background: url("./img/bg.jpeg");
+  background: BlanchedAlmond;
   scrollbar-width: none;
   &::-webkit-scrollbar{
     display: none;
   }
 `;
 
+
 const App = () => {
 
+  
+
+
   return (
-    <Container>
+    <>
+      <Container>
+
+        <Home1 />
+        
+        {/* <WebgiViewer /> */}
+        {/* eventSource={document.getElementById('root')} */}
+        <Who />
+        <Works />
+      </Container>
       
-      <Home1 />
-      <Antique />
-      <Who />
-    </Container>
+      
+    </>
+
   )
 }
 

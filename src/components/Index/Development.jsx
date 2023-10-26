@@ -7,16 +7,13 @@ const Development = () => {
   return (
     <Canvas>
 
-      <Stage environment="city" scale={0.5}>
+      <Stage environment="city">
 
         <Chinese_temple></Chinese_temple>
 
       </Stage>
-      
-      
 
-
-      <OrbitControls enableZoom={true} autoRotate={true}></OrbitControls>
+      <OrbitControls enableZoom={false} autoRotate={false}></OrbitControls>
       
 
     </Canvas>

@@ -50,7 +50,7 @@ const Navbar = () => {
         <Section>
             <Container>
                 <Links>
-                    <Logo src="./img/logo.png"></Logo>
+                    <Logo src="./img/logo.svg"></Logo>
                     <List>
                         <ListItem>Home</ListItem>
                         <ListItem>Studio</ListItem>

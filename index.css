@@ -7,8 +7,13 @@
     width: 100px;
     padding: 10px;
     background-color: #dc6a28;
-    color: white;
+    color: rgb(255, 255, 255);
     border: none;
     border-radius: 5px;
     cursor: pointer;
 }
+
+/* Container {
+    color: white;
+    background: BlanchedAlmond;
+} */
