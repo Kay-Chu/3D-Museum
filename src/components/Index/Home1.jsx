@@ -52,8 +52,9 @@ const ModelSpace = styled.div`
   margin-top: 10rem;
   display: flex;
   justify-content: center;
-  gap: 10rem;
+  gap: 5rem;
   height: 50vh;
+  width: 100%;
 `;
 
 const Home1 = () => {
@@ -66,17 +67,17 @@ const Home1 = () => {
     return modelResources.map((modelName, index) => {
       return (
         <div key={index}>
-          <Canvas>
+          <Canvas style={{ width: "100%" }}>
             <Card modelName={modelName} />
           </Canvas>
           <Button
             className="button"
             id={modelName}
             onClick={() => {
-              params ? setLocation("/") : setLocation("/item/" + String(modelName));
+              (params == null) ? setLocation("/item/" + String(modelName)) : setLocation("/") ;
             }}
           >
-            {params ? "< back" : "Learn More"}
+            {params == null || params.id != modelName ? "Learn More" : "< back"}
           </Button>
         </div>
       );
