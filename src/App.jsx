@@ -6,8 +6,6 @@ import Antique from "./components/Index/Antique"
 import styled from "styled-components";
 import WebgiViewer from "./components/Index/WebgiViewer"
 
-
-
 import "../index.css"
 
 const Container = styled.div`
@@ -26,9 +24,6 @@ const Container = styled.div`
 
 const App = () => {
 
-  
-
-
   return (
     <>
       <Container>
@@ -37,8 +32,8 @@ const App = () => {
         
         {/* <WebgiViewer /> */}
         {/* eventSource={document.getElementById('root')} */}
-        <Who />
-        <Works />
+        {/* <Who />
+        <Works /> */}
       </Container>
       
       

@@ -5,7 +5,7 @@ import { Canvas } from "@react-three/fiber";
 
 import { OrbitControls, Stage } from "@react-three/drei";
 import { useLocation, useRoute } from "wouter";
-import Test from "./Test";
+import Card from "./Card";
 import Cube from "./Cube";
 
 const Section = styled.div`
@@ -27,13 +27,13 @@ const Container = styled.div`
   width: 1400px;
   text-align: center;
   justify-content: space-between;
+  
 `;
 
 const Title = styled.h1`
   font-siz: 74px;
 `;
 const WhatWeDo = styled.div`
-  // display: flex;
   align-items: center;
   gap: 10px;
 `;
@@ -48,10 +48,41 @@ const Desc = styled.p`
   color: lightgray;
 `;
 const Button = styled.button``;
+const ModelSpace = styled.div`
+  margin-top: 10rem;
+  display: flex;
+  justify-content: center;
+  gap: 10rem;
+  height: 50vh;
+`;
 
 const Home1 = () => {
+  const modelResources = ["Chair", "Chinese_temple"];
+
   const [_, setLocation] = useLocation();
   const [, params] = useRoute("/item/:id");
+
+  const renderModels = () => {
+    return modelResources.map((modelName, index) => {
+      return (
+        <div key={index}>
+          <Canvas>
+            <Card modelName={modelName} />
+          </Canvas>
+          <Button
+            className="button"
+            id={modelName}
+            onClick={() => {
+              params ? setLocation("/") : setLocation("/item/" + String(modelName));
+            }}
+          >
+            {params ? "< back" : "Learn More"}
+          </Button>
+        </div>
+      );
+    });
+  };
+
   return (
     <Section>
       <Navbar />
@@ -64,19 +95,8 @@ const Home1 = () => {
         <Desc>
           We enjoy creating delightful, human-centered digital experiences.
         </Desc>
-        <Button
-          className="button"
-          id="temple"
-          onClick={(e) => {
-            params ? setLocation("/") : setLocation("/item/" + e.target.id);
-          }}
-        >
-          {params ? "< back" : "Learn More"}
-        </Button>
 
-        <Canvas>
-            <Test />
-        </Canvas>
+        <ModelSpace>{renderModels()}</ModelSpace>
       </Container>
     </Section>
   );
