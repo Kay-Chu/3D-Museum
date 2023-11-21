@@ -1,7 +1,7 @@
 import React from 'react';
 import { OrbitControls, Stage } from '@react-three/drei';
 import { Canvas } from '@react-three/fiber';
-import Chair from "./Chair";
+import Chair from "../Gallery/Chair";
 
 const WebDesign = () => {
   return (

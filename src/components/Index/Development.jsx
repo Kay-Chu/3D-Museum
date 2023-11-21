@@ -1,7 +1,7 @@
 import { OrbitControls, Stage } from '@react-three/drei'
 import { Canvas } from '@react-three/fiber'
 import React from 'react'
-import Chinese_temple from './Chinese_temple-freepoly'
+import Chinese_temple from '../Gallery/Chinese_temple-freepoly'
 
 const Development = () => {
   return (

@@ -29,8 +29,8 @@ const List = styled.ul`
     gap: 20px;
     list-style: none;
 `
-const ListItem = styled.li`
-
+const ListItem = styled.a`
+    color: #596e79;
 `
 const Icons = styled.div`
     display: flex;
@@ -50,17 +50,15 @@ const Navbar = () => {
         <Section>
             <Container>
                 <Links>
-                    <Logo src="./img/logo.svg"></Logo>
+                    <Logo src="/img/logo_dark.svg"></Logo>
                     <List>
-                        <ListItem>Home</ListItem>
-                        <ListItem>Studio</ListItem>
-                        <ListItem>Work</ListItem>
-                        <ListItem>Contact</ListItem>
+                        <ListItem button component="a" href="/">Home</ListItem>
+                        <ListItem button component="a" href="/Gallery/GalleryIndex">Gallery</ListItem>
                     </List>
                 </Links>
                 <Icons>
-                    <Icon src="./img/search.png" />
-                    <Button className='button'>Hire Now</Button>
+                    {/* <Icon src="./img/search.png" /> */}
+                    <Button className='button'>Try with AI</Button>
                 </Icons>
             </Container>
         </Section>
