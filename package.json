@@ -9,6 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@ant-design/pro-components": "^2.6.43",
     "@react-three/drei": "^9.86.0",
     "@react-three/fiber": "^8.14.3",
     "@types/webgi": "https://dist.pixotronics.com/webgi/runtime/bundle-types-0.8.5.tgz",

@@ -10,17 +10,7 @@ import { useLocation, useRoute } from "wouter";
 
 import "../index.css";
 
-const Container = styled.div`
-  height: 100vh;
-  scroll-snap-type: y mandatory;
-  scroll-behavior: smooth;
-  overflow-y: auto;
-  color: white;
-  scrollbar-width: none;
-  &::-webkit-scrollbar {
-    display: none;
-  }
-`;
+const Container = styled.div``;
 
 const App = () => {
   const [, setLocation] = useLocation();
@@ -28,7 +18,7 @@ const App = () => {
 
   return (
     <>
-      <Container>
+      <Container className="container">
 
         {params === null && <Home1 />}
         {params && <GalleryIndex />} 

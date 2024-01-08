@@ -17,7 +17,6 @@ import Chair from "./Chair";
 import Chinese_temple from "./Chinese_temple-freepoly";
 import Pot from "./Pot";
 
-
 const Card = (props) => {
   const modelName = props.modelName;
   const mode = props.mode;
@@ -70,6 +69,9 @@ const Card = (props) => {
               {modelName === "Pot" && (
               <Pot position={[0, 0, 0]} fov={0} scale={0.3} />
             )}
+            {modelName === "Pot" && (
+              <Pot position={[0, 0, 0]} fov={0} scale={0.3} />
+            )}
             </MeshPortalMaterial>
           </mesh>
         </group>
@@ -81,6 +83,9 @@ const Card = (props) => {
             )}
             {modelName === "Chinese_temple" && (
               <Chinese_temple position={[0, -0.3, 0]} fov={25} scale={0.1} />
+            )}
+            {modelName === "Pot" && (
+              <Pot position={[0, 0, 0]} fov={10} scale={0.7} />
             )}
             {modelName === "Pot" && (
               <Pot position={[0, 0, 0]} fov={10} scale={0.7} />

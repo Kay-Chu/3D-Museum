@@ -5,15 +5,14 @@ import styled from "styled-components";
 import { OrbitControls, Stage } from "@react-three/drei";
 import { useLocation, useRoute } from "wouter";
 import Card from "./Card";
+import "../../../index.css";
 
 const Section = styled.div`
   height: 100vh;
   // scroll-snap-align: center;
   display: flex;
 
-  @media only screen and (max-width: 768px) {
-    width: 100%;
-  }
+ 
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
@@ -25,6 +24,13 @@ const Container = styled.div`
   width: 1400px;
   text-align: center;
   justify-content: space-between;
+  > div{
+    width: 100%;
+  }
+
+  @media only screen and (max-width: 768px) {
+    width: 90%;
+  }
 `;
 
 const ModelSpace = styled.div`
@@ -33,11 +39,24 @@ const ModelSpace = styled.div`
   justify-content: center;
   height: 80vh;
   width: 100%;
+
+
+  @media only screen and (max-width: 768px) {
+    display: block!important;
+    // width: 90% !important;
+    > div {
+      display: block;
+      height: 80%!important;
+      width: 90% !important;
+      margin-bottom: 50px;
+    }
+  }
 `;
 const Button = styled.button``;
 
+
 const GalleryIndex = () => {
-  const modelResources = ["Chair", "Chinese_temple", "Pot"];
+  const modelResources = ["Chair", "Chinese_temple", "Pot", "Pot2"];
 
   const [_, setLocation] = useLocation();
   const [, params] = useRoute("/Gallery/:id");
