@@ -27,7 +27,12 @@ color set for reference
 */
 
 .button {
-  @apply w-[100px] p-2.5 bg-gray-700 text-white border-0 rounded-md cursor-pointer;
+  @apply w-[100px] p-1.5 text-white border-0 rounded-md cursor-pointer items-center justify-center;
+  text-align: center;
+  background-color: #c7b198;
+}
+.button span {
+  @apply text-xs;
 }
 
 h1 {
@@ -151,7 +156,7 @@ html {
 
   @media (max-width: 768px) {
     .button {
-      @apply w-full; 
+      /* @apply w-full;  */
     }
 
     #mobileNavBar {

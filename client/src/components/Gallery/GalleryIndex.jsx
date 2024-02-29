@@ -14,14 +14,7 @@ import "../../../index.css";
 //   margin-right: 1em;
 // `;
 const Section = styled.div`
-  height: 100vh;
   // scroll-snap-align: center;
-  display: flex;
-
- 
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-between;
 `;
 
 const Container = styled.div`
@@ -33,15 +26,13 @@ const Container = styled.div`
   > div{
     width: 100%;
   }
-
-
 `;
 
 const ModelSpace = styled.div`
   margin-top: 2rem;
   display: flex;
   justify-content: center;
-  height: 80vh;
+  height: 70vh;
   width: 100%;
 
   @media only screen and (max-width: 768px) {
@@ -57,9 +48,9 @@ const ModelSpace = styled.div`
   }
 `;
 const Button = styled.button`
-@media only screen and (max-width: 768px) {
-width: 20%;
-}
+// @media only screen and (max-width: 768px) {
+// width: 20%;
+// }
 `;
 
 
@@ -104,7 +95,7 @@ const GalleryIndex = () => {
               }
             }}
           >
-            {buttonText}
+            <span>{buttonText}</span>
           </Button>
         </div>
         

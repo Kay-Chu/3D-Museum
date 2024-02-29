@@ -130,7 +130,7 @@ const Navbar = () => {
         </Links>
         <Icons>
           {/* <Icon src="./img/search.png" /> */}
-          <Button className="button" onClick={handleNavigateToAI}>Try with AI</Button>
+          <Button className="button" onClick={handleNavigateToAI}><span>Try with AI</span></Button>
         </Icons>
       </Container>
     </Section>
