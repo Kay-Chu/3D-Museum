@@ -7,12 +7,7 @@ import { useLocation, useRoute } from "wouter";
 import Card from "./Card";
 import "../../../index.css";
 
-// const Section = styled.div``;
 
-// const Container = styled.div`
-//   margin-left: 1em;
-//   margin-right: 1em;
-// `;
 const Section = styled.div`
   // scroll-snap-align: center;
 `;
@@ -47,11 +42,7 @@ const ModelSpace = styled.div`
     }
   }
 `;
-const Button = styled.button`
-// @media only screen and (max-width: 768px) {
-// width: 20%;
-// }
-`;
+const Button = styled.button``;
 
 
 const GalleryIndex = () => {
@@ -70,9 +61,6 @@ const GalleryIndex = () => {
     if (isIndex || isModelSelected) {
       modelJSX = (
         <>
-        
-          
-        
         <div
           key={index}
           style={
