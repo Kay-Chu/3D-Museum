@@ -11,16 +11,19 @@ height: 90vh;
 `
 
 const AiIndex = () => {
+
   return (
     
     <>
         <Navbar />
-        <Section className="section"> 
+
+        <CanvasModel />
+        {/* <Section className="section"> 
         
         <Container className="container">
           <CanvasModel />
         </Container>
-      </Section>
+      </Section> */}
     </>
   )
 }

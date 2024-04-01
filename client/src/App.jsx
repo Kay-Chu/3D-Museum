@@ -20,9 +20,6 @@ const App = () => {
   const [, galleryMatch] = useRoute("/Gallery/:id");
   const [, aiIndexMatch] = useRoute("/Ai/AiIndex");
 
-  console.log('AI Index Match:', aiIndexMatch);
-
-
   return (
     <>
       <Container className="container">
