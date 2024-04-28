@@ -1,6 +1,6 @@
 import React from 'react'
 
-function FilePicker() {
+const FilePicker = ()  => {
   return (
     <div>FilePicker</div>
   )
