@@ -8,6 +8,8 @@ import Card from "./Card";
 import "../../../index.css";
 
 
+
+
 const Section = styled.div`
   // scroll-snap-align: center;
 `;
@@ -100,7 +102,26 @@ const GalleryIndex = () => {
       <Section className="section">
         
         <Container className="container">
+          
+
+{/* 
+  <Scene embedded arjs='trackingMethod: best;'>
+    <Entity>
+      <Entity
+        primitive="a-marker-camera"
+        type="pattern"
+        url="/ar/pattern-lemon.patt"
+      />
+      <Entity
+        primitive="a-text"
+        value="bbb"
+        position="0 0.5 0"
+      />
+    </Entity>
+  </Scene> */}
+
           <ModelSpace>{renderModels}</ModelSpace>
+          
         </Container>
       </Section>
     </>

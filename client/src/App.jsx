@@ -1,12 +1,8 @@
-import Navbar from "./components/Navbar";
+
 import Home1 from "./components/Index/Home1";
 import GalleryIndex from "./components/Gallery/GalleryIndex";
 import AiIndex from "./components/Ai/AiIndex";
-import Who from "./components/Index/Who";
-import Works from "./components/Index/Works";
-import Antique from "./components/Index/Antique";
 import styled from "styled-components";
-import WebgiViewer from "./components/Index/WebgiViewer";
 
 import { useLocation, useRoute } from "wouter";
 
