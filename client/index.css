@@ -32,12 +32,18 @@ color set for reference
   background-color: #e4c072;
 /* #e4c072 */
 }
+.button:hover {
+  transform: 3s scale(1.05); 
+  opacity: 0.9; 
+}
+
 .button span {
   @apply text-xs;
 }
 
 h1 {
-    color: #596e79;
+    /* color: #596e79; */
+    color: aliceblue;
 }
 h2 {
     color: #c9bbaa;
@@ -47,7 +53,8 @@ p {
     color: #c1c1c1;
 }
 body {
-    background: linear-gradient(to bottom, rgba(255,0,0,0), rgb(136, 136, 136));
+    /* background: linear-gradient(to bottom, rgba(255,0,0,0), rgb(136, 136, 136)); */
+    background-color: black;
 }
 
 .section {
@@ -64,6 +71,23 @@ body {
 .container::-webkit-scrollbar {
   display: none;
 }
+
+.background_particles {
+  position: absolute; 
+  z-index: -1;
+  width: 100%;
+  height: 100%!important;
+}
+
+.absolute {
+  position: absolute;
+}
+
+.fullHeight {
+  height: 100vh!important;
+}
+
+
 
 html {
     font-family: "Inter", sans-serif;
@@ -82,6 +106,7 @@ html {
   .home {
     @apply w-fit xl:h-full flex xl:justify-between justify-start items-start flex-col xl:py-8 xl:px-36 sm:p-8 p-6 max-xl:gap-7 absolute z-10;
   }
+
   
   .home-content {
     @apply flex-1 xl:justify-center justify-start flex flex-col gap-10;

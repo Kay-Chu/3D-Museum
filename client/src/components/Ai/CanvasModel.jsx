@@ -1,7 +1,7 @@
 import { Canvas } from "@react-three/fiber";
 import { OrbitControls, Box, Environment, Center } from "@react-three/drei";
 
-import Shirt from "./Shirt";
+// import Shirt from "./Shirt";
 import Backdrop from "./Backdrop";
 import CameraRig from "./CameraRig";
 
@@ -9,7 +9,7 @@ import ModelForAI from "./ModelForAI";
 
 
 
-const CanvasModel = () => {
+const CanvasModel = ({ currentModel, collections, ...props }) => {
   return (
     <>
       
@@ -27,7 +27,7 @@ const CanvasModel = () => {
 
         <CameraRig>
         {/* <Backdrop /> */}
-          <ModelForAI />
+          <ModelForAI currentModel={currentModel} collections={collections}/>
 
         </CameraRig>
       </Canvas>

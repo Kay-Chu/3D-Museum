@@ -7,13 +7,14 @@ Source: https://sketchfab.com/3d-models/chinsese-keepsake-pot-guangdong-china-98
 Title: Chinsese Keepsake Pot, Guangdong, China
 */
 
-import React, { useRef } from 'react'
-import { useGLTF } from '@react-three/drei'
+import React, { forwardRef } from 'react';
+import { useGLTF } from '@react-three/drei';
 
-export default function Pot(props) {
-  const { nodes, materials } = useGLTF('/pot.glb')
+// Use forwardRef wrapper function to ensure that ref can be accessed externally
+const Pot = forwardRef((props, ref) => {
+  const { nodes, materials } = useGLTF('/pot.glb');
   return (
-    <group {...props} dispose={null}>
+    <group {...props} dispose={null} ref={ref}>
       <group position={[0.11, -0.281, 0.07]} rotation={[1.34, 0.411, -1.796]}>
         <group rotation={[-Math.PI, 0, 0]}>
           <mesh geometry={nodes.Model_material0_0.geometry} material={materials.material0} />
@@ -27,7 +28,10 @@ export default function Pot(props) {
         </group>
       </group>
     </group>
-  )
-}
+  );
+});
 
-useGLTF.preload('/pot.glb')
+useGLTF.preload('/pot.glb');
+
+export default Pot;
+

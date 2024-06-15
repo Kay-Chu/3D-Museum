@@ -41,7 +41,8 @@ const MenuList = styled.ul`
   }
 `;
 const MenuListItem = styled.a`
-  color: #596e79;
+  // color: #596e79;
+  color: aliceblue;
 `;
 const Icons = styled.div`
   display: flex;

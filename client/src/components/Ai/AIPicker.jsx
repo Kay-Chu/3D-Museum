@@ -7,7 +7,7 @@ const AIPicker = (props) => {
   return (
     <div className="aipicker-container">
       <textarea
-        placeholder="Ask AI..."
+        placeholder="Type to create your image:)"
         rows={5}
         value={props.prompt}
         onChange={(e) => props.setPrompt(e.target.value)}
@@ -18,7 +18,7 @@ const AIPicker = (props) => {
         {props.generatingImg ? (
           <CustomButton
             type="outline"
-            title="Asking AI..."
+            title="Generating Your Image..."
             customStyles={"text-us"}
           />
         ) : (
@@ -33,7 +33,7 @@ const AIPicker = (props) => {
 
             <CustomButton
               type="filled"
-              title="AI Full"
+              title="DIY Texture"
               handleClick={() => props.handleSubmit("full")}
               customStyles="text-xs"
             />

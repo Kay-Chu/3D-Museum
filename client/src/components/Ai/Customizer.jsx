@@ -16,16 +16,20 @@ import Tab from "./Tab";
 
 // import { imageConverter } from "./imageConverter";
 
+
 import styled from "styled-components";
 const Image = styled.image`
-height: 70px;
-width: 70px;
+height: 20%;
+width: 20%;
 position: fixed;
 right: 1rem;
 top: 10rem;
 `;
 
-const Customizer = () => {
+const Customizer = ({selectedStyle}) => {
+
+  console.log("Current style:", selectedStyle);
+
   const snap = useSnapshot(state);
 
   const [prompt, setPrompt] = useState("");
@@ -35,6 +39,7 @@ const Customizer = () => {
   const [activeEditorTab, setActiveEditorTab] = useState("");
 
   const generateTabContent = () => {
+
     return (
       <AIPicker
         prompt={prompt}
@@ -45,21 +50,41 @@ const Customizer = () => {
     );
   };
 
-  const handleSubmit = async (type) => {
-    console.log("handleSubmit called with type:", type);
+  const handleSubmit = async () => {
 
-    if (!prompt) return alert("Pleae enter a prompt");
+    let finalPrompt = prompt;
+    switch (selectedStyle) {
+        case "ink":
+            finalPrompt += ", Based on this, integrate ancient Chinese culture, and process this image with Traditional Chinese ink painting style.";
+            break;
+        case "porcelain":
+            finalPrompt += ", Based on this, integrate ancient Chinese culture, and process this image with Traditional Chinese blue and white porcelain pattern style.";
+            break;
+        case "mural":
+            finalPrompt += ", Based on this, integrate ancient Chinese culture, and process this image with Traditional Chinese mural art style.";
+            break;
+        default:
+            finalPrompt += ""; 
+    }
+
 
     try {
       setGeneratingImg(true);
-      const response = await fetch("http://museum.k-chu.com/api/v1/dalle", {
+
+      const localUrl = "http://localhost:8080/api/v1/dalle";
+      const webUrl = "http://museum.k-chu.com/api/v1/dalle";
+
+      const response = await fetch(localUrl, {
       //const response = await fetch("http://localhost:8080/api/v1/dalle", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          prompt,
+          prompt: finalPrompt,
+          max_tokens: 5,
+          size: "256x256",
+          style: "vivid",
         }),
       });
 
@@ -122,6 +147,7 @@ const Customizer = () => {
         {
           // snap.intro &&
           <>
+<div><h1>  {selectedStyle}</h1></div>
             <motion.div
               key="custom"
               className="absolute top-0 left-0 z-999"
@@ -136,9 +162,11 @@ const Customizer = () => {
                 </div>
               </div>
             </motion.div>
+            
             <Image alt="Generated Image">
-              {imageUrl && <img src={imageUrl} alt="Generated from base64" />}
+              {imageUrl && <img src={imageUrl} alt="Generated from base64" className="generatedImage"/>}
             </Image>
+            
           </>
         }
       </AnimatePresence>

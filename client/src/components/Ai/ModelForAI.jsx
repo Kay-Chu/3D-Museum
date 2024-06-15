@@ -10,14 +10,14 @@ import state from "./store";
 // collection1: yu
 // collection2: shoes
 
-const ModelForAI = () => {
+const ModelForAI = ({ currentModel, collections, ...props }) => {
   const snap = useSnapshot(state);
 
-
+  // const collections = ['collection1.glb', 'collection2.glb', 'pot.glb'];
 
   const stateString = JSON.stringify(snap);
 
-  const { scene } = useGLTF("/collection1.glb");
+const { scene } = useGLTF(`/${collections[currentModel] || ''}`);
 
   const texture = useLoader(TextureLoader, snap.fullDecal);
 

@@ -1,4 +1,4 @@
-import React from "react";
+import {React, useState} from "react";
 import Navbar from "../Navbar";
 import { Canvas } from "@react-three/fiber";
 import styled from "styled-components";
@@ -7,8 +7,8 @@ import { useLocation, useRoute } from "wouter";
 import Card from "./Card";
 import "../../../index.css";
 
-
-
+import CustomButton from "../Ai/CustomButton";
+import { motion } from "framer-motion";
 
 const Section = styled.div`
   // scroll-snap-align: center;
@@ -16,11 +16,11 @@ const Section = styled.div`
 
 const Container = styled.div`
   height: 90vh;
-  flex-direction: coloumn;
+  flex-direction: column; // corrected spelling mistake from 'coloumn' to 'column'
   width: 1400px;
   text-align: center;
   justify-content: space-between;
-  > div{
+  > div {
     width: 100%;
   }
 `;
@@ -33,36 +33,49 @@ const ModelSpace = styled.div`
   width: 100%;
 
   @media only screen and (max-width: 768px) {
-    display: inline-block!important;
-    // width: 100%;
+    display: inline-block !important;
     > div {
-      display: block!important;
-      height: 80%!important;
+      display: block !important;
+      height: 80% !important;
       width: 90% !important;
-
       margin-bottom: 50px;
     }
   }
 `;
+
 const Button = styled.button``;
 
-
 const GalleryIndex = () => {
-  const modelResources = ["Chair", "Chinese_temple", "Pot", "To-Adds"];
+  const modelResources = [
+    { name: "Vase", title: "Jade Hall" },
+    { name: "Chinese_temple", title: "Porcelain Hall" },
+    { name: "Collection3", title: "Handicrafts Hall" }
+  ];
+
+  const [selectedHall, setSelectedHall] = useState(null);
+  const handleClick = (hall) => {
+    setSelectedHall(hall);
+  };
+  const handleShowAll = () => {
+    setSelectedHall(null);
+  };
 
   const [_, setLocation] = useLocation();
   const [, params] = useRoute("/Gallery/:id");
 
-  const renderModels = modelResources.map((modelName, index) => {
-    const isModelSelected = params.id === modelName;
+  const renderModels = modelResources.map((model, index) => {
+    const isModelSelected = params.id === model.name;
     const isIndex = params.id === "GalleryIndex";
     const buttonText = isModelSelected ? "< back" : "Explore >";
     const mode = isModelSelected ? "ModelView" : "CardView";
 
+    if (selectedHall !== null && model.name !== selectedHall) {
+      return null;
+    }
+
     let modelJSX;
     if (isIndex || isModelSelected) {
       modelJSX = (
-        <>
         <div
           key={index}
           style={
@@ -72,14 +85,14 @@ const GalleryIndex = () => {
           }
         >
           <Canvas>
-            <Card modelName={modelName} index={index} mode={mode} />
+            <Card modelName={model.name} index={index} mode={mode} />
           </Canvas>
           <Button
             className="button"
-            id={modelName}
+            id={model.name}
             onClick={() => {
               if (params.id === "GalleryIndex") {
-                setLocation("/Gallery/" + String(modelName));
+                setLocation("/Gallery/" + String(model.name));
               } else {
                 setLocation("/Gallery/GalleryIndex");
               }
@@ -88,8 +101,6 @@ const GalleryIndex = () => {
             <span>{buttonText}</span>
           </Button>
         </div>
-        
-        </>
       );
     }
 
@@ -99,34 +110,33 @@ const GalleryIndex = () => {
   return (
     <>
       <Navbar />
-      <Section className="section">
-        
+      <Section className="section fullHeight">
         <Container className="container">
-          
-
-{/* 
-  <Scene embedded arjs='trackingMethod: best;'>
-    <Entity>
-      <Entity
-        primitive="a-marker-camera"
-        type="pattern"
-        url="/ar/pattern-lemon.patt"
-      />
-      <Entity
-        primitive="a-text"
-        value="bbb"
-        position="0 0.5 0"
-      />
-    </Entity>
-  </Scene> */}
-
+          <div>
+            <ul className="list-group" style={{ color: "#ffffff", display: "inline-flex" }}>
+              <li className="list-inline-item">
+                <motion.div whileHover={{ scale: 1.2 }}>
+                  <CustomButton type="filled" title="All" handleClick={handleShowAll} />
+                </motion.div>
+              </li>
+              {modelResources.map((model) => (
+                <li className="list-inline-item" key={model.name}>
+                  <motion.div whileHover={{ scale: 1.2 }}>
+                    <CustomButton
+                      type="filled"
+                      title={model.title}
+                      handleClick={() => handleClick(model.name)}
+                    />
+                  </motion.div>
+                </li>
+              ))}
+            </ul>
+          </div>
           <ModelSpace>{renderModels}</ModelSpace>
-          
         </Container>
       </Section>
     </>
   );
-
 };
 
 export default GalleryIndex;
