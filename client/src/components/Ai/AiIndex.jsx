@@ -7,6 +7,7 @@ import CustomButton from "./CustomButton";
 import { motion } from "framer-motion";
 
 import Customizer from "./Customizer";
+import state from "./store/index";
 
 import $ from "jquery";
 
@@ -19,7 +20,7 @@ const TextInput = styled.div`
   z-index: 999;
 `;
 const Container = styled.div`
-  height: 60vh;
+  height: 90vh;
 `;
 
 const AiIndex = () => {
@@ -29,6 +30,9 @@ const AiIndex = () => {
   const collections = [
     "collection1.glb",
     "collection2.glb",
+    "collection3.glb",
+    "collection4.glb",
+    "collection5.glb",
   ];
   const handleModelSwitch = () => {
     setCurrentModel((prevModel) => (prevModel + 1) % collections.length);
@@ -36,6 +40,12 @@ const AiIndex = () => {
 
   const handleButtonClick = (style) => {
     setSelectedStyle(style);
+  };
+
+  const handleDefaultImg = (imageUrl) => {
+    state.isFullTexture = true;
+    state.fullDecal = imageUrl;
+    console.log(state.fullDecal);
   };
 
   useEffect(() => {
@@ -75,8 +85,7 @@ const AiIndex = () => {
       <Navbar />
 
       <Section className="section">
-        <Container className="container fullHeight">
-        
+        <Container className="container">
           <div className="styleSelection">
             <ul className="list-group" style={{ display: "flex" }}>
               <li className="style_button list-inline-item">
@@ -94,7 +103,6 @@ const AiIndex = () => {
                     handleClick={() => handleButtonClick("porcelain")}
                   />
                 </motion.div>
-                
               </li>
               <li className="style_button list-inline-item">
                 <motion.div whileHover={{ scale: 1.2 }}>
@@ -106,13 +114,20 @@ const AiIndex = () => {
               </li>
             </ul>
           </div>
-          <div >
-              <button className="button" onClick={handleModelSwitch} style={{borderRadius: "5rem", display:"flex"}}>
-<div style={{alignItems: "center", padding:"0"}}><img src="/img/shuffle.png" /> </div>
-                
+          <div>
+            <button
+              className="button"
+              onClick={handleModelSwitch}
+              style={{ borderRadius: "5rem", display: "flex" }}
+            >
+              <div style={{ alignItems: "center", padding: "0" }}>
+                <img src="/img/shuffle.png" />
+              </div>
+
               {/* <i className="fas fa-shuffle fa-lg" style={{color: "#ffffff"}}/> */}
-              </button>
-            </div>
+            </button>
+          </div>
+
           <TextInput>
             <Customizer
               selectedStyle={selectedStyle}
@@ -125,7 +140,20 @@ const AiIndex = () => {
             currentModel={currentModel}
             collections={collections}
           />
-
+          <div className="sketch-picker sticky-md-bottom">
+            <button
+              onClick={() => handleDefaultImg("/img/lemon.jpeg")}
+              style={{ borderRadius: "5rem", display: "flex" }}
+            >
+              <img className="" src="/img/lemon.jpeg" />
+            </button>
+            <button
+              onClick={() => handleDefaultImg("/img/blue.jpeg")}
+              style={{ borderRadius: "5rem", display: "flex" }}
+            >
+              <img className="" src="/img/blue.jpeg" />
+            </button>
+          </div>
         </Container>
       </Section>
     </>
