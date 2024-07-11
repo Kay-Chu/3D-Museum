@@ -24,6 +24,13 @@ const Card = (props) => {
   const modelName = props.modelName;
   const mode = props.mode;
 
+  const [lightIntensity, setLightIntensity] = useState(props.modeLight);
+  useEffect(() => {
+    setLightIntensity(props.modeLight);
+  }, [props.modeLight]);
+
+  
+
   const portal = useRef();
   const [, params] = useRoute("/Gallery/:id");
 
@@ -85,7 +92,7 @@ const Card = (props) => {
         <group>
        
           <mesh>
-            <ModelView />
+            <ModelView lightIntensity={lightIntensity} />
             {modelName === "Vase" && (
               <Vase position={[-1, 0, -7]} fov={0} scale={0.5} />
             )}
@@ -104,7 +111,7 @@ const Card = (props) => {
   );
 };
 
-const ModelView = () => {
+const ModelView = ({lightIntensity}) => {
   const controlsRef = useRef();
 
   useEffect(() => {
@@ -115,8 +122,8 @@ const ModelView = () => {
 
   return (
     <>
-      <ambientLight intensity={4}></ambientLight>
-      <directionalLight position={[3, 2, 1]}></directionalLight>
+      <ambientLight intensity={lightIntensity}></ambientLight>
+      <directionalLight position={[3, 2,  1]}></directionalLight>
       <CameraControls
         makeDefault
         minPolarAngle={0}
