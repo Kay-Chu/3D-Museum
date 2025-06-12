@@ -29,6 +29,7 @@ top: 10rem;
 const Customizer = ({selectedStyle}) => {
 
   console.log("Current style:", selectedStyle);
+  
 
   const snap = useSnapshot(state);
 
@@ -64,18 +65,18 @@ const Customizer = ({selectedStyle}) => {
             finalPrompt += ", Based on this, integrate ancient Chinese culture, and process this image with Traditional Chinese mural art style.";
             break;
         default:
-            finalPrompt += ""; 
+            finalPrompt += ", Based on this, integrate ancient Chinese culture, and process this image with Traditional Chinese ink painting style."; 
     }
 
 
     try {
       setGeneratingImg(true);
 
-      const localUrl = "http://localhost:8081/api/v1/dalle";
+      // const localUrl = "http://localhost:8081/api/v1/dalle";
       const webUrl = "https://museum.k-chu.com/api/v1/dalle";
 
       const response = await fetch(webUrl, {
-      //const response = await fetch("http://localhost:8080/api/v1/dalle", {
+      // const response = await fetch(localUrl, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
