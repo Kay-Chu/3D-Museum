@@ -33,9 +33,9 @@ router.route('/').post(async(req,res)=>{
             n: 1,
             size: '256x256',
             response_format: 'b64_json',
-            style: "vivid",
+        //    style: "vivid",
         });
-        console.log("response",response)
+
         
         const image  = response.data[0].b64_json;
         res.status(200).json({photo: image});

@@ -72,11 +72,11 @@ const Customizer = ({selectedStyle}) => {
     try {
       setGeneratingImg(true);
 
-      // const localUrl = "http://localhost:8081/api/v1/dalle";
-      const webUrl = "https://museum.k-chu.com/api/v1/dalle";
+      const localUrl = "http://localhost:8081/api/v1/dalle";
+      // const webUrl = "https://museum.k-chu.com/api/v1/dalle";
 
-      const response = await fetch(webUrl, {
-      // const response = await fetch(localUrl, {
+      // const response = await fetch(webUrl, {
+      const response = await fetch(localUrl, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

@@ -104,7 +104,7 @@ const Home1 = () => {
           initial="hidden"
           animate="show"
         >
-          <DescriptionContainer style={{ marginLeft: "5rem" }}>
+          {/* <DescriptionContainer style={{ marginLeft: "5rem" }}> */}
             <motion.div variants={description}>
               <Title>Explore the museum by 3D models</Title>
               <p>
@@ -113,10 +113,10 @@ const Home1 = () => {
               </p>
               <p>Unlocking the future of cultural heritage presentations.</p>
             </motion.div>
-            <img src="/ar/home_hkpm.jpg" width="160" height="160"></img>
+            {/* <img src="/ar/home_hkpm.jpg" width="160" height="160"></img> */}
 
             
-          </DescriptionContainer>
+          {/* </DescriptionContainer> */}
         </motion.div>
         <StyledCanvas>
           <ambientLight intensity={0.5} />

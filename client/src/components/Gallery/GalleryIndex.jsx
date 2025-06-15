@@ -89,7 +89,7 @@ const GalleryIndex = () => {
   const modelResources = [
     { name: "Vase", title: "Jade Hall" },
     { name: "Chinese_temple", title: "Porcelain Hall" },
-    { name: "Collection3", title: "Handicrafts Hall" },
+    { name: "Buddha_statues", title: "Handicrafts Hall" },
   ];
 
   const [selectedHall, setSelectedHall] = useState(null);

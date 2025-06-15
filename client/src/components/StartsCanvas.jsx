@@ -7,8 +7,8 @@ const Stars = (props) => {
   const [positions, setPositions] = useState(() => {
     const positions = new Float32Array(5000 * 3);
     for (let i = 0; i < 5000; i++) {
-      positions[i * 3 + 0] = (Math.random() - 0.5) * window.innerWidth / 200;
-      positions[i * 3 + 1] = (Math.random() - 0.5) * window.innerHeight / 200;
+      positions[i * 3 + 0] = (Math.random() - 0.5) * window.innerWidth / 500;
+      positions[i * 3 + 1] = (Math.random() - 0.5) * window.innerHeight / 500;
       positions[i * 3 + 2] = (Math.random() - 0.5) * window.innerWidth / 200;
     }
     return positions;
@@ -35,7 +35,7 @@ const Stars = (props) => {
           <PointMaterial
             transparent
             color="#f272c8"
-            size={0.007}
+            size={0.01}
             sizeAttenuation={true}
             depthWrite={false}
           />

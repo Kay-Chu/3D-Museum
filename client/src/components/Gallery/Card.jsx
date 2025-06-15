@@ -6,7 +6,7 @@ import {
   Text,
 } from "@react-three/drei";
 import { easing, geometry } from "maath";
-import { extend, useFrame, useLoader, useThree  } from "@react-three/fiber";
+import { extend, useFrame, useLoader, useThree } from "@react-three/fiber";
 import { TextureLoader, PlaneGeometry, MeshBasicMaterial, Mesh } from "three";
 extend(geometry);
 import * as THREE from "three";
@@ -21,16 +21,17 @@ import Vase from "./Vase";
 
 
 const Card = (props) => {
+
   const modelName = props.modelName;
   const mode = props.mode;
 
+  // For display lighting
   const [lightIntensity, setLightIntensity] = useState(props.modeLight);
   useEffect(() => {
     setLightIntensity(props.modeLight);
   }, [props.modeLight]);
 
-  
-
+  // Index
   const portal = useRef();
   const [, params] = useRoute("/Gallery/:id");
 
@@ -39,10 +40,10 @@ const Card = (props) => {
     // Dynamically generate the URL based on modelName
     // const texture = useLoader(TextureLoader, `/ar/${modelName}.jpg`);
     const texture = useLoader(TextureLoader, `/ar/collection1.jpg`);
-  
+
     return (
       <mesh position={[3, 0, -1]}>
-        <planeGeometry args={[1, 1]} /> 
+        <planeGeometry args={[1, 1]} />
         <meshBasicMaterial map={texture} />
       </mesh>
     );
@@ -55,10 +56,11 @@ const Card = (props) => {
           <Text
             position={[-0.375, 0.715, 0.01]}
             lineHeight={0.3}
-            fontSize={0.2}
+            fontSize={0.1}
             material-toneMapped={false}
           >
-            {modelName}
+
+            {modelName.replace(/[^a-zA-Z0-9]/g, ' ')}
           </Text>
           <Text
             position={[0.4, -0.659, 0.01]}
@@ -79,7 +81,7 @@ const Card = (props) => {
               {modelName === "Chinese_temple" && (
                 <Chinese_temple position={[0, -0.4, 0]} fov={25} scale={0.1} />
               )}
-              {modelName === "Collection3" && (
+              {modelName === "Buddha_statues" && (
                 <Collection3 position={[0, -0.7, 0]} fov={0} scale={2.7} />
               )}
 
@@ -88,30 +90,30 @@ const Card = (props) => {
         </group>
       ) : (
         <>
-         <ImagePlane modelName={modelName}/>
-        <group>
-       
-          <mesh>
-            <ModelView lightIntensity={lightIntensity} />
-            {modelName === "Vase" && (
-              <Vase position={[-1, 0, -7]} fov={0} scale={0.5} />
-            )}
-            {modelName === "Chinese_temple" && (
-              <Chinese_temple position={[0, -0.3, 0]} fov={25} scale={0.1} />
-            )}
-            {modelName === "Collection3" && (
-              <Collection3 position={[0, -0.7, 0]} fov={10} scale={3} />
-            )}
+          <ImagePlane modelName={modelName} />
+          <group>
 
-          </mesh>
-        </group>
+            <mesh>
+              <ModelView lightIntensity={lightIntensity} />
+              {modelName === "Vase" && (
+                <Vase position={[-1, 0, -7]} fov={0} scale={0.5} />
+              )}
+              {modelName === "Chinese_temple" && (
+                <Chinese_temple position={[0, -0.3, 0]} fov={25} scale={0.1} />
+              )}
+              {modelName === "Buddha_statues" && (
+                <Collection3 position={[0, -0.7, 0]} fov={10} scale={3} />
+              )}
+
+            </mesh>
+          </group>
         </>
       )}
     </>
   );
 };
 
-const ModelView = ({lightIntensity}) => {
+const ModelView = ({ lightIntensity }) => {
   const controlsRef = useRef();
 
   useEffect(() => {
@@ -123,7 +125,7 @@ const ModelView = ({lightIntensity}) => {
   return (
     <>
       <ambientLight intensity={lightIntensity}></ambientLight>
-      <directionalLight position={[3, 2,  1]}></directionalLight>
+      <directionalLight position={[3, 2, 1]}></directionalLight>
       <CameraControls
         makeDefault
         minPolarAngle={0}
