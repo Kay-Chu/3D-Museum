@@ -51,9 +51,10 @@ const Customizer = ({selectedStyle}) => {
     );
   };
 
-  const handleSubmit = async () => {
+  const handleSubmit = async (imageStyle) => {
 
     let finalPrompt = prompt;
+    console.log(imageStyle);
     switch (selectedStyle) {
         case "ink":
             finalPrompt += ", Based on this, integrate ancient Chinese culture, and process this image with Traditional Chinese ink painting style.";
@@ -96,10 +97,17 @@ const Customizer = ({selectedStyle}) => {
 
       setImageUrl(imageUrl); // Update state with new image URL
 
-      state.isFullTexture = true;
-      state.isLogoTexture = false;
+      if (imageStyle === 'logo') {
+        state.isLogoTexture = true;  
+        state.isFullTexture = false;
+        state.logoDecal = imageUrl;
+      } else {
+        state.isLogoTexture = false;  
+        state.isFullTexture = true;
+        state.fullDecal = imageUrl;
+      }
       
-      state.fullDecal = imageUrl;
+     
       
     } catch (error) {
       alert(error);

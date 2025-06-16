@@ -42,18 +42,23 @@ const AiIndex = () => {
     setSelectedStyle(style);
   };
 
-  const handleDefaultImg_full = (imageUrl) => {
+  const handleFullTexture = () => {
     state.isLogoTexture = false;
     state.isFullTexture = true;
-    state.fullDecal = imageUrl;
+    // state.fullDecal = imageUrl;
     // console.log(state.logoDecal);
   };
 
-  const handleDefaultImg_logo = (imageUrl) => {
+  const handleLogoTexture = () => {
     state.isLogoTexture = true;
     state.isFullTexture = false;
-    state.logoDecal = imageUrl;
+    // state.logoDecal = imageUrl;
     // console.log(state.logoDecal);
+  };
+
+  const handleClearTexture = () => {
+    state.isLogoTexture = false;
+    state.isFullTexture = false;
   };
 
   useEffect(() => {
@@ -144,22 +149,30 @@ const AiIndex = () => {
           </TextInput>
 
           <CanvasModel
-            className="z-10 h-full "
+            className="z-10 h-full"
             currentModel={currentModel}
             collections={collections}
           />
-          <div className="sketch-picker sticky-md-bottom">
+          <div className="sketch-picker sticky-md-bottom" style={{width:"min-content"}} >
             <button
-              onClick={() => handleDefaultImg_full("/img/lemon.jpeg")}
+              onClick={() => handleFullTexture()}
               style={{ borderRadius: "5rem", display: "flex" }}
             >
-              <img className="" src="/img/lemon.jpeg" />
+              {/* <img className="" src="/img/lemon.jpeg" /> */}
+              <p style={{fontSize: '1em'}}>FULL</p>
             </button>
             <button
-              onClick={() => handleDefaultImg_logo("/img/blue.jpeg")}
+              onClick={() => handleLogoTexture()}
               style={{ borderRadius: "5rem", display: "flex" }}
             >
-              <img className="" src="/img/blue.jpeg" />
+              {/* <img className="" src="/img/blue.jpeg" /> */}
+              <p style={{fontSize: '1em'}}>LOGO</p>
+            </button>
+            <button
+              onClick={() => handleClearTexture()}
+              style={{ borderRadius: "5rem", display: "flex" }}
+            >
+              <p style={{fontSize: '1em'}}>CLEAR</p>
             </button>
           </div>
         </Container>

@@ -25,21 +25,22 @@ const ModelForAI = ({ currentModel, collections, ...props }) => {
   }, [snap.fullDecal]);
 
   const logoTexture = useMemo(() => {
-    if (!snap.logoDecal) return null;
+    if (!snap.logoDecal ) return null;
     const loader = new THREE.TextureLoader();
     return loader.load(snap.logoDecal);
   }, [snap.logoDecal]);
+
   const baseTexture = useMemo(() => {
     const mat = Object.values(materials)[0];
     return mat?.map || new THREE.Texture();
   }, [materials]);
 
   const shaderMaterial = useMemo(() => {
-    if (!snap.isLogoTexture || !logoTexture) return null;
+    // if (!snap.isLogoTexture || !logoTexture) return null;
 
     return new THREE.ShaderMaterial({
       uniforms: {
-        baseMap: { value: fullTexture || baseTexture },
+        baseMap: { value: baseTexture },
         logoMap: { value: logoTexture },
         logoPosition: { value: new THREE.Vector2(logoPosition.x, logoPosition.y) },
         logoSize: { value: logoPosition.size },
@@ -74,7 +75,7 @@ const ModelForAI = ({ currentModel, collections, ...props }) => {
       `,
       transparent: true
     });
-  }, [snap.isLogoTexture, logoTexture, fullTexture, baseTexture, logoPosition]);
+  }, [logoTexture, baseTexture, logoPosition]);
 
   // Bind shader or full texture
   useEffect(() => {
@@ -93,14 +94,12 @@ const ModelForAI = ({ currentModel, collections, ...props }) => {
         color: "white",
       });
     }
-  }, [snap.isFullTexture, snap.isLogoTexture, fullTexture, shaderMaterial]);
+  }, [snap.isFullTexture, snap.isLogoTexture, fullTexture, shaderMaterial, baseTexture]);
 
   // Update shader uniforms in realtime
   useFrame(() => {
     if (
-      meshRef.current &&
-      meshRef.current.material &&
-      meshRef.current.material.uniforms
+      meshRef.current?.material?.uniforms
     ) {
       meshRef.current.material.uniforms.logoPosition.value.set(
         logoPosition.x,
