@@ -97,6 +97,7 @@ const Customizer = ({selectedStyle}) => {
       setImageUrl(imageUrl); // Update state with new image URL
 
       state.isFullTexture = true;
+      state.isLogoTexture = false;
       
       state.fullDecal = imageUrl;
       

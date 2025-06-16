@@ -31,7 +31,7 @@ const Card = (props) => {
     setLightIntensity(props.modeLight);
   }, [props.modeLight]);
 
-  // Index
+  // QR code
   const portal = useRef();
   const [, params] = useRoute("/Gallery/:id");
 
@@ -39,7 +39,7 @@ const Card = (props) => {
 
     // Dynamically generate the URL based on modelName
     // const texture = useLoader(TextureLoader, `/ar/${modelName}.jpg`);
-    const texture = useLoader(TextureLoader, `/ar/collection1.jpg`);
+    const texture = useLoader(TextureLoader, `/ar/vase.jpg`);
 
     return (
       <mesh position={[3, 0, -1]}>

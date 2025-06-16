@@ -42,10 +42,18 @@ const AiIndex = () => {
     setSelectedStyle(style);
   };
 
-  const handleDefaultImg = (imageUrl) => {
+  const handleDefaultImg_full = (imageUrl) => {
+    state.isLogoTexture = false;
     state.isFullTexture = true;
     state.fullDecal = imageUrl;
-    console.log(state.fullDecal);
+    // console.log(state.logoDecal);
+  };
+
+  const handleDefaultImg_logo = (imageUrl) => {
+    state.isLogoTexture = true;
+    state.isFullTexture = false;
+    state.logoDecal = imageUrl;
+    // console.log(state.logoDecal);
   };
 
   useEffect(() => {
@@ -142,13 +150,13 @@ const AiIndex = () => {
           />
           <div className="sketch-picker sticky-md-bottom">
             <button
-              onClick={() => handleDefaultImg("/img/lemon.jpeg")}
+              onClick={() => handleDefaultImg_full("/img/lemon.jpeg")}
               style={{ borderRadius: "5rem", display: "flex" }}
             >
               <img className="" src="/img/lemon.jpeg" />
             </button>
             <button
-              onClick={() => handleDefaultImg("/img/blue.jpeg")}
+              onClick={() => handleDefaultImg_logo("/img/blue.jpeg")}
               style={{ borderRadius: "5rem", display: "flex" }}
             >
               <img className="" src="/img/blue.jpeg" />

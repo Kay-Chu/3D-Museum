@@ -22,7 +22,7 @@ const CanvasModel = ({ currentModel, collections, ...props }) => {
         // className="transition-all ease-in"
       >
         <ambientLight intensity={0.7} />
-        <Environment preset="city" />
+        <Environment preset="sunset" />
 
 
         <CameraRig>

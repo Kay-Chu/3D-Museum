@@ -14,7 +14,7 @@ const AIPicker = (props) => {
         className="aipicker-textarea"
       />
 
-      <div className="flex flex-wrap gap-3">
+      <div className="flex">
         {props.generatingImg ? (
           <CustomButton
             type="outline"
@@ -24,16 +24,16 @@ const AIPicker = (props) => {
         ) : (
           <>
 
-            {/* <CustomButton
-              type="outline"
-              title="AI Logo"
+            <CustomButton
+              type="filled"
+              title="Logo"
               handleClick={() => props.handleSubmit("logo")}
               customStyles="text-xs"
-            /> */}
+            />
 
             <CustomButton
               type="filled"
-              title="DIY Texture"
+              title="Full"
               handleClick={() => props.handleSubmit("full")}
               customStyles="text-xs"
             />
