@@ -7,24 +7,24 @@ Source: https://sketchfab.com/3d-models/chinsese-keepsake-pot-guangdong-china-98
 Title: Chinsese Keepsake Pot, Guangdong, China
 */
 
-import React, { forwardRef, useState, useEffect } from 'react';
+import React, { forwardRef, useState, useEffect, memo } from 'react';
 import { useGLTF, Detailed, useProgress } from '@react-three/drei';
 import { Suspense } from 'react';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
 
 
 // Preload the low precision model
-const LowPot = forwardRef((props, ref) => {
+const LowPot = memo(forwardRef((props, ref) => {
   const { nodes, materials } = useGLTF('/pot-low.glb');
   return (
     <group ref={ref} {...props} dispose={null}>
      <mesh geometry={nodes.Model_material0_0.geometry} material={materials.material0} position={[0.084, -0.152, -0.058]} rotation={[-1.801, -0.411, 1.796]} scale={1.564} />
     </group>
   );
-});
+}));
 
 
-const Pot = forwardRef((props, ref) => {
+const Pot = memo(forwardRef((props, ref) => {
 
   const [highResReady, setHighResReady] = useState(false);
   // const { nodes, materials } = useGLTF('/pot.glb');
@@ -73,7 +73,7 @@ const Pot = forwardRef((props, ref) => {
       </Suspense>
     </Detailed>
   );
-});
+}));
 
 // useGLTF.preload('/pot.glb');
 

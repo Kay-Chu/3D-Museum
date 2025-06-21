@@ -1,8 +1,8 @@
-import { useState, useEffect, useRef, Suspense } from "react";
+import { useState, useEffect, useRef, Suspense, memo } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { Points, PointMaterial, Preload } from "@react-three/drei";
 
-const Stars = (props) => {
+const Stars = memo((props) => {
   const ref = useRef();
   const [positions, setPositions] = useState(() => {
     const positions = new Float32Array(5000 * 3);
@@ -43,7 +43,7 @@ const Stars = (props) => {
       </group>
     </>
   );
-};
+});
 
 const StartsCanvas = () => {
   // const [containerRef, setContainerRef] = useState(null);
@@ -73,6 +73,6 @@ const StartsCanvas = () => {
       </Canvas>
     </div>
   );
-};
+  }
 
 export default StartsCanvas;

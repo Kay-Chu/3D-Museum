@@ -7,32 +7,75 @@ Source: https://sketchfab.com/3d-models/chinese-porcelain-crackle-vase-462d30c3e
 Title: Chinese Porcelain Crackle Vase
 */
 
-import React, { useRef } from 'react'
-import { useGLTF } from '@react-three/drei'
+import React, { forwardRef, useState, useEffect, memo, ref } from 'react';
+import { useGLTF, Detailed, useProgress } from '@react-three/drei';
+import { Suspense } from 'react';
+import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
 
-export default function Vase(props) {
-  const { nodes, materials } = useGLTF('/vase.glb')
+// Preload the low precision model
+const LowVase = memo(forwardRef((props, ref) => {
+  const { nodes, materials } = useGLTF('/vase-low.glb');
   return (
-    <group {...props} dispose={null}>
-      <group rotation={[0.014, 0.222, 1.568]}>
-        <group rotation={[-Math.PI, 0, 0]}>
-          <mesh geometry={nodes.Model_material0_0.geometry} material={materials.material0} />
-          <mesh geometry={nodes.Model_material0_0_1.geometry} material={materials.material0} />
-          <mesh geometry={nodes.Model_material0_0_2.geometry} material={materials.material0} />
-          <mesh geometry={nodes.Model_material0_0_3.geometry} material={materials.material0} />
-          <mesh geometry={nodes.Model_material0_0_4.geometry} material={materials.material0} />
-          <mesh geometry={nodes.Model_material0_0_5.geometry} material={materials.material0} />
-          <mesh geometry={nodes.Model_material0_0_6.geometry} material={materials.material0} />
-          <mesh geometry={nodes.Model_material0_0_7.geometry} material={materials.material0} />
-          <mesh geometry={nodes.Model_material0_0_8.geometry} material={materials.material0} />
-          <mesh geometry={nodes.Model_material0_0_9.geometry} material={materials.material0} />
-          <mesh geometry={nodes.Model_material0_0_10.geometry} material={materials.material0} />
-          <mesh geometry={nodes.Model_material0_0_11.geometry} material={materials.material0} />
-          <mesh geometry={nodes.Model_material0_0_12.geometry} material={materials.material0} />
+    <group ref={ref} {...props} dispose={null}>
+      <mesh geometry={nodes.Model_material0_0.geometry} material={materials.material0} position={[2.03, 0.054, 9.343]} rotation={[-3.128, -0.222, -1.568]} scale={3.149} />
+    </group>
+  );
+}));
+
+const Vase = memo((props) => {
+  const [highResReady, setHighResReady] = useState(false);
+  const { nodes, materials } = highResReady
+    ? useGLTF('/vase.glb')
+    : { nodes: null, materials: null };
+
+  useEffect(() => {
+    let isMounted = true;
+    const loader = new GLTFLoader();
+
+    loader.load('/vase.glb', () => {
+      if (isMounted) setHighResReady(true);
+    });
+
+    return () => {
+      isMounted = false;
+      // Clear
+      if (loader.manager.getHandler('/vase.glb')) {
+        loader.manager.itemEnd('/vase.glb');
+      }
+    };
+  }, []);
+
+
+  return (
+    <Detailed distances={[3, 10]} ref={ref}>
+      {highResReady && (<group {...props} dispose={null}>
+        <group rotation={[0.014, 0.222, 1.568]}>
+          <group rotation={[-Math.PI, 0, 0]}>
+            <mesh geometry={nodes.Model_material0_0.geometry} material={materials.material0} />
+            <mesh geometry={nodes.Model_material0_0_1.geometry} material={materials.material0} />
+            <mesh geometry={nodes.Model_material0_0_2.geometry} material={materials.material0} />
+            <mesh geometry={nodes.Model_material0_0_3.geometry} material={materials.material0} />
+            <mesh geometry={nodes.Model_material0_0_4.geometry} material={materials.material0} />
+            <mesh geometry={nodes.Model_material0_0_5.geometry} material={materials.material0} />
+            <mesh geometry={nodes.Model_material0_0_6.geometry} material={materials.material0} />
+            <mesh geometry={nodes.Model_material0_0_7.geometry} material={materials.material0} />
+            <mesh geometry={nodes.Model_material0_0_8.geometry} material={materials.material0} />
+            <mesh geometry={nodes.Model_material0_0_9.geometry} material={materials.material0} />
+            <mesh geometry={nodes.Model_material0_0_10.geometry} material={materials.material0} />
+            <mesh geometry={nodes.Model_material0_0_11.geometry} material={materials.material0} />
+            <mesh geometry={nodes.Model_material0_0_12.geometry} material={materials.material0} />
+          </group>
         </group>
       </group>
-    </group>
-  )
-}
+      )}
 
-useGLTF.preload('/vase.glb')
+      <Suspense fallback={null}>
+        <LowVase {...props} visible={!highResReady || props.distance > 3} />
+      </Suspense>
+    </Detailed>
+  )
+})
+
+export default Vase;
+
+// useGLTF.preload('/vase.glb')
