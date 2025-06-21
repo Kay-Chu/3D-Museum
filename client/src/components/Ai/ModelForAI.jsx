@@ -16,7 +16,7 @@ const ModelForAI = ({ currentModel, collections, ...props }) => {
 
 
   const meshRef = useRef();
-  const [logoPosition, setLogoPosition] = useState({ x: 0.5, y: 0.5, size: 0.05 });
+  const [logoPosition, setLogoPosition] = useState({ x: 0.5, y: 0.5, size: 1 });
 
   const fullTexture = useMemo(() => {
     if (!snap.fullDecal) return null;
@@ -44,7 +44,7 @@ const ModelForAI = ({ currentModel, collections, ...props }) => {
         logoMap: { value: logoTexture },
         logoPosition: { value: new THREE.Vector2(logoPosition.x, logoPosition.y) },
         logoSize: { value: logoPosition.size },
-        opacity: { value: 1.0 }
+        opacity: { value: 0.15 }
       },
       vertexShader: `
         varying vec2 vUv;
@@ -124,14 +124,8 @@ const ModelForAI = ({ currentModel, collections, ...props }) => {
         receiveShadow
       />
 
-        {/* {snap.isLogoTexture && !snap.isFullTexture && logoTexture && (
-          <><mesh
-            ref={meshRef}
-            castShadow
-            geometry={nodes.mesh_0.geometry}
-            material={defaultMaterial}
-            dispose={null} />
-
+        {snap.isLogoTexture && !snap.isFullTexture && logoTexture && (
+          <>
             <mesh position={[0, 0, -1]} rotation={[0, Math.PI, 0]} scale={1}>
               <planeGeometry args={[0.5, 0.5]} />
               <meshBasicMaterial
@@ -140,7 +134,7 @@ const ModelForAI = ({ currentModel, collections, ...props }) => {
                 opacity={0.9}
                 side={THREE.DoubleSide} />
             </mesh></>
-        )} */}
+        )}
 
 
       </group>
