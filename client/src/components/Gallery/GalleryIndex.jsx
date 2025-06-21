@@ -8,6 +8,7 @@ import Card from "./Card";
 import "../../../index.css";
 
 import CustomButton from "../Ai/CustomButton";
+import LightPositionControl from "./LightPositionControl";
 import { motion } from "framer-motion";
 import Slider from "@mui/material/Slider";
 
@@ -94,6 +95,7 @@ const GalleryIndex = () => {
 
   const [selectedHall, setSelectedHall] = useState(null);
   const [modeLight, setModeLight] = useState(1);
+  const [lightPosition, setLightPosition] = useState([3,2,1]);
 
   const handleClick = (hall) => {
     setSelectedHall(hall);
@@ -132,7 +134,7 @@ const GalleryIndex = () => {
           }
         >
           <Canvas>
-            <Card modelName={model.name} index={index} mode={mode} modeLight={modeLight} />
+            <Card modelName={model.name} index={index} mode={mode} modeLight={modeLight} lightPosition={lightPosition}/>
           </Canvas>
           <Button
             className="button"
@@ -171,6 +173,10 @@ const GalleryIndex = () => {
               max={4}
               step={0.1}
             />
+             <LightPositionControl 
+                lightPosition={lightPosition}
+                onChange={setLightPosition}
+              />
           </SliderContainer>
         )}
 

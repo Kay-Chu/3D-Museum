@@ -27,9 +27,11 @@ const Card = (props) => {
 
   // For display lighting
   const [lightIntensity, setLightIntensity] = useState(props.modeLight);
+  const [lightPosition, setLightPosition] = useState(props.lightPosition);
   useEffect(() => {
     setLightIntensity(props.modeLight);
-  }, [props.modeLight]);
+    setLightPosition(props.lightPosition);
+  }, [props.modeLight, props.lightPosition]);
 
   // QR code
   const portal = useRef();
@@ -94,7 +96,7 @@ const Card = (props) => {
           <group>
 
             <mesh>
-              <ModelView lightIntensity={lightIntensity} />
+              <ModelView lightIntensity={lightIntensity} lightPosition={lightPosition}/>
               {modelName === "Vase" && (
                 <Vase position={[-1, 0, -7]} fov={0} scale={0.5} />
               )}
@@ -113,7 +115,7 @@ const Card = (props) => {
   );
 };
 
-const ModelView = ({ lightIntensity }) => {
+const ModelView = ({ lightIntensity, lightPosition }) => {
   const controlsRef = useRef();
 
   useEffect(() => {
@@ -125,7 +127,8 @@ const ModelView = ({ lightIntensity }) => {
   return (
     <>
       <ambientLight intensity={lightIntensity}></ambientLight>
-      <directionalLight position={[3, 2, 1]}></directionalLight>
+      {/* <directionalLight position={[3, 2, 1]}></directionalLight> */}
+      <directionalLight position={lightPosition}></directionalLight> 
       <CameraControls
         makeDefault
         minPolarAngle={0}
