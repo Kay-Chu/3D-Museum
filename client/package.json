@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@ant-design/pro-components": "^2.6.43",
+    "@gltf-transform/cli": "^4.2.0",
     "@react-three/drei": "^9.105.1",
     "@react-three/fiber": "^8.14.3",
     "@react-three/xr": "^5.7.1",

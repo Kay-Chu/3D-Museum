@@ -7,31 +7,75 @@ Source: https://sketchfab.com/3d-models/chinsese-keepsake-pot-guangdong-china-98
 Title: Chinsese Keepsake Pot, Guangdong, China
 */
 
-import React, { forwardRef } from 'react';
-import { useGLTF } from '@react-three/drei';
+import React, { forwardRef, useState, useEffect } from 'react';
+import { useGLTF, Detailed, useProgress } from '@react-three/drei';
+import { Suspense } from 'react';
+import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
 
-// Use forwardRef wrapper function to ensure that ref can be accessed externally
-const Pot = forwardRef((props, ref) => {
-  const { nodes, materials } = useGLTF('/pot.glb');
+
+// Preload the low precision model
+const LowPot = forwardRef((props, ref) => {
+  const { nodes, materials } = useGLTF('/pot-low.glb');
   return (
-    <group {...props} dispose={null} ref={ref}>
-      <group position={[0.11, -0.281, 0.07]} rotation={[1.34, 0.411, -1.796]}>
-        <group rotation={[-Math.PI, 0, 0]}>
-          <mesh geometry={nodes.Model_material0_0.geometry} material={materials.material0} />
-          <mesh geometry={nodes.Model_material0_0_1.geometry} material={materials.material0} />
-          <mesh geometry={nodes.Model_material0_0_2.geometry} material={materials.material0} />
-          <mesh geometry={nodes.Model_material0_0_3.geometry} material={materials.material0} />
-          <mesh geometry={nodes.Model_material0_0_4.geometry} material={materials.material0} />
-          <mesh geometry={nodes.Model_material0_0_5.geometry} material={materials.material0} />
-          <mesh geometry={nodes.Model_material0_0_6.geometry} material={materials.material0} />
-          <mesh geometry={nodes.Model_material0_0_7.geometry} material={materials.material0} />
-        </group>
-      </group>
+    <group ref={ref} {...props} dispose={null}>
+     <mesh geometry={nodes.Model_material0_0.geometry} material={materials.material0} position={[0.084, -0.152, -0.058]} rotation={[-1.801, -0.411, 1.796]} scale={1.564} />
     </group>
   );
 });
 
-useGLTF.preload('/pot.glb');
+
+const Pot = forwardRef((props, ref) => {
+
+  const [highResReady, setHighResReady] = useState(false);
+  // const { nodes, materials } = useGLTF('/pot.glb');
+  const { nodes, materials } = highResReady 
+  ? useGLTF('/pot.glb') 
+  : { nodes: null, materials: null };
+
+  useEffect(() => {
+    let isMounted = true;
+    const loader = new GLTFLoader();
+
+    loader.load('/pot.glb', () => {
+      if (isMounted) setHighResReady(true);
+    });
+
+    return () => {
+      isMounted = false;
+      // Clear
+      if (loader.manager.getHandler('/pot.glb')) {
+        loader.manager.itemEnd('/pot.glb');
+      }
+    };
+  }, []);
+
+
+  return (
+    <Detailed distances={[3, 10]} ref={ref}>
+      {highResReady && (<group {...props} dispose={null} ref={ref}>
+        <group position={[0.11, -0.281, 0.07]} rotation={[1.34, 0.411, -1.796]}>
+          <group rotation={[-Math.PI, 0, 0]}>
+            <mesh geometry={nodes.Model_material0_0.geometry} material={materials.material0} />
+            <mesh geometry={nodes.Model_material0_0_1.geometry} material={materials.material0} />
+            <mesh geometry={nodes.Model_material0_0_2.geometry} material={materials.material0} />
+            <mesh geometry={nodes.Model_material0_0_3.geometry} material={materials.material0} />
+            <mesh geometry={nodes.Model_material0_0_4.geometry} material={materials.material0} />
+            <mesh geometry={nodes.Model_material0_0_5.geometry} material={materials.material0} />
+            <mesh geometry={nodes.Model_material0_0_6.geometry} material={materials.material0} />
+            <mesh geometry={nodes.Model_material0_0_7.geometry} material={materials.material0} />
+          </group>
+        </group>
+      </group>
+      )}
+      
+      <Suspense fallback={null}>
+        <LowPot {...props} visible={!highResReady || props.distance > 3} />
+      </Suspense>
+    </Detailed>
+  );
+});
+
+// useGLTF.preload('/pot.glb');
 
 export default Pot;
 
