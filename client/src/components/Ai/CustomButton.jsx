@@ -19,7 +19,7 @@ const CustomButton = ({ type, title, customStyles, handleClick, isActive }) => {
   const generateStyle = (type) => {
     if(type === 'filled') {
       return {
-        backgroundColor: snap.color,
+        backgroundColor: "#e4c072",
         color: getContrastingColor(snap.color),
         margin: 10,
         padding: 10
@@ -27,8 +27,11 @@ const CustomButton = ({ type, title, customStyles, handleClick, isActive }) => {
     } else if(type === "outline") {
       return {
         borderWidth: '1px',
-        borderColor: snap.color,
-        color: snap.color,
+        // borderColor: snap.color,
+        // color: snap.color,
+        borderColor: "#f1f1f1",
+        color: "#f1f1f1f1",
+        margin: 10,
         padding: 10
       }
     }

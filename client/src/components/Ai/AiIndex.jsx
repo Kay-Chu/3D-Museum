@@ -9,7 +9,6 @@ import { motion } from "framer-motion";
 import Customizer from "./Customizer";
 import state from "./store/index";
 
-import $ from "jquery";
 
 const Section = styled.div``;
 const TextInput = styled.div`
@@ -24,7 +23,7 @@ const Container = styled.div`
 `;
 
 const AiIndex = () => {
-  const [selectedStyle, setSelectedStyle] = useState(null);
+  const [selectedStyle, setSelectedStyle] = useState("ink");
   const [currentModel, setCurrentModel] = useState(0);
 
   const collections = [
@@ -61,12 +60,7 @@ const AiIndex = () => {
     state.isFullTexture = false;
   };
 
-  useEffect(() => {
-    $(".style_button").on("click", "li", function (e) {
-      $(this).parent().find("li.active").removeClass("active");
-      $(this).addClass("active");
-    });
-  }, []);
+
 
   const getButtonProps = (style) => {
     switch (style) {
@@ -105,6 +99,7 @@ const AiIndex = () => {
                 <motion.div whileHover={{ scale: 1.2 }}>
                   <CustomButton
                     {...getButtonProps("ink")}
+                    type={selectedStyle === "ink" ? "filled" : "outline"}
                     handleClick={() => handleButtonClick("ink")}
                   />
                 </motion.div>
@@ -113,6 +108,7 @@ const AiIndex = () => {
                 <motion.div whileHover={{ scale: 1.2 }}>
                   <CustomButton
                     {...getButtonProps("porcelain")}
+                    type={selectedStyle === "porcelain" ? "filled" : "outline"}
                     handleClick={() => handleButtonClick("porcelain")}
                   />
                 </motion.div>
@@ -121,6 +117,7 @@ const AiIndex = () => {
                 <motion.div whileHover={{ scale: 1.2 }}>
                   <CustomButton
                     {...getButtonProps("mural")}
+                    type={selectedStyle === "mural" ? "filled" : "outline"}
                     handleClick={() => handleButtonClick("mural")}
                   />
                 </motion.div>
