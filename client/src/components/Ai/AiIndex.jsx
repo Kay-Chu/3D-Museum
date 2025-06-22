@@ -24,21 +24,14 @@ const Container = styled.div`
 
 const AiIndex = () => {
   const [selectedStyle, setSelectedStyle] = useState("ink");
-  const [currentModel, setCurrentModel] = useState(0);
-
-  const collections = [
-    "collection1.glb",
-    "collection2.glb",
-    "collection3.glb",
-    "collection4.glb",
-    "collection5.glb",
-  ];
-  const handleModelSwitch = () => {
-    setCurrentModel((prevModel) => (prevModel + 1) % collections.length);
-  };
+  const [resetFlag, setResetFlag] = useState(false);
 
   const handleButtonClick = (style) => {
     setSelectedStyle(style);
+  };
+
+  const handleReset = () => {
+    setResetFlag(prev => !prev);
   };
 
   const handleFullTexture = () => {
@@ -127,18 +120,17 @@ const AiIndex = () => {
           <div>
             <button
               className="button"
-              onClick={handleModelSwitch}
               style={{ borderRadius: "5rem", display: "flex" }}
+              onClick={handleReset}
             >
               <div style={{ alignItems: "center", padding: "0" }}>
-                <img src="/img/shuffle.png" />
+                <img src="/img/refresh.png" />
               </div>
-
-              {/* <i className="fas fa-shuffle fa-lg" style={{color: "#ffffff"}}/> */}
             </button>
           </div>
 
           <TextInput>
+
             <Customizer
               selectedStyle={selectedStyle}
               className="absolute z-999"
@@ -147,8 +139,7 @@ const AiIndex = () => {
 
           <CanvasModel
             className="z-10 h-full"
-            currentModel={currentModel}
-            collections={collections}
+            resetFlag={resetFlag}
           />
           <div className="sketch-picker sticky-md-bottom" style={{width:"min-content"}} >
             <button

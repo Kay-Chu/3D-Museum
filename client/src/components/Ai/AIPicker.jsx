@@ -18,7 +18,7 @@ const AIPicker = (props) => {
         {props.generatingImg ? (
           <CustomButton
             type="outline"
-            title="Generating Your Image..."
+            title="Generating..."
             customStyles={"text-us"}
           />
         ) : (

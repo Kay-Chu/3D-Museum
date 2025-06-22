@@ -157,7 +157,7 @@ const Customizer = ({selectedStyle}) => {
         {
           // snap.intro &&
           <>
-<div><h1>  {selectedStyle}</h1></div>
+{/* <div><p>  {selectedStyle.toUpperCase()}</p></div> */}
             <motion.div
               key="custom"
               className="absolute top-0 left-0 z-999"

@@ -1,15 +1,13 @@
 import { Canvas } from "@react-three/fiber";
 import { OrbitControls, Box, Environment, Center } from "@react-three/drei";
-
-// import Shirt from "./Shirt";
 import Backdrop from "./Backdrop";
 import CameraRig from "./CameraRig";
-
 import ModelForAI from "./ModelForAI";
+import { memo, } from "react";
 
 
 
-const CanvasModel = ({ currentModel, collections, ...props }) => {
+const CanvasModel = memo(({ resetFlag, ...props }) => {
   return (
     <>
       
@@ -27,12 +25,12 @@ const CanvasModel = ({ currentModel, collections, ...props }) => {
 
         <CameraRig>
         {/* <Backdrop /> */}
-          <ModelForAI currentModel={currentModel} collections={collections}/>
+          <ModelForAI resetFlag={resetFlag}/>
 
         </CameraRig>
       </Canvas>
     </>
   );
-};
+});
 
 export default CanvasModel;
