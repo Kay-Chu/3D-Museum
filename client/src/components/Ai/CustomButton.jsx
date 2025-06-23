@@ -32,7 +32,7 @@ const CustomButton = ({ type, title, customStyles, handleClick, isActive }) => {
         borderColor: "#f1f1f1",
         color: "#f1f1f1f1",
         margin: 10,
-        padding: 10
+        padding: "0.2em"
       }
     }
   }

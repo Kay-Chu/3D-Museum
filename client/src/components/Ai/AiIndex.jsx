@@ -141,14 +141,15 @@ const AiIndex = () => {
             className="z-10 h-full"
             resetFlag={resetFlag}
           />
+            <p style={{fontSize: '1em'}}> Click to expand / Click and press the shift key to shape</p>
+
           <div className="sketch-picker sticky-md-bottom" style={{width:"min-content"}} >
-            <button
+            {/* <button
               onClick={() => handleFullTexture()}
               style={{ borderRadius: "5rem", display: "flex" }}
-            >
-              {/* <img className="" src="/img/lemon.jpeg" /> */}
-              <p style={{fontSize: '1em'}}>FULL</p>
-            </button>
+            > */}
+              {/* <p style={{fontSize: '1em'}}>FULL</p>
+            </button> */}
             <button
               onClick={() => handleLogoTexture()}
               style={{ borderRadius: "5rem", display: "flex" }}

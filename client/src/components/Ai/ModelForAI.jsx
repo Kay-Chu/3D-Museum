@@ -55,7 +55,7 @@ const ModelForAI = memo((resetFlag, props) => {
     geom.userData.duplicateMap = duplicates;
     return geom;
   }, []);
-  const duplicates = geometry.userData.duplicateMap;
+
 
   // States & Refs
   const meshRef = useRef();
@@ -300,7 +300,7 @@ const ModelForAI = memo((resetFlag, props) => {
         );
   
         const currentDisplacement = v.clone().sub(original).dot(originalNormal);
-        const delta = direction * 0.03 * strength;
+        const delta = direction * 0.01 * strength;
         const newDisplacement = currentDisplacement + delta;
   
         if (Math.abs(newDisplacement) <= maxDisplacement) {

@@ -18,7 +18,7 @@ const AIPicker = (props) => {
         {props.generatingImg ? (
           <CustomButton
             type="outline"
-            title="Generating..."
+            title="Drying and Firing..."
             customStyles={"text-us"}
           />
         ) : (
@@ -26,17 +26,17 @@ const AIPicker = (props) => {
 
             <CustomButton
               type="filled"
-              title="Logo"
+              title="Custom Logo"
               handleClick={() => props.handleSubmit("logo")}
               customStyles="text-xs"
             />
 
-            <CustomButton
+            {/* <CustomButton
               type="filled"
               title="Full"
               handleClick={() => props.handleSubmit("full")}
               customStyles="text-xs"
-            />
+            /> */}
           </>
         )}
       </div>

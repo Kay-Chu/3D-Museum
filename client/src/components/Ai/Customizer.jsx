@@ -99,10 +99,10 @@ const Customizer = ({selectedStyle}) => {
 
       if (imageStyle === 'logo') {
         state.isLogoTexture = true;  
-        state.isFullTexture = false;
+        // state.isFullTexture = false;
         state.logoDecal = imageUrl;
       } else {
-        state.isLogoTexture = false;  
+        // state.isLogoTexture = false;  
         state.isFullTexture = true;
         state.fullDecal = imageUrl;
       }
