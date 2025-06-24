@@ -90,11 +90,11 @@ const ModelForAI = memo((resetFlag, props) => {
     canvas.width = canvas.height = 2;
     const ctx = canvas.getContext("2d");
     if (ctx) {
-      ctx.fillStyle = "#ffffff";
+      ctx.fillStyle = snap.color;
       ctx.fillRect(0, 0, 2, 2);
     }
     return new THREE.CanvasTexture(canvas);
-  }, []);
+  }, [snap.color]);
 
   const shaderMaterial = useMemo(() => {
     if (!logoTexture) return null;

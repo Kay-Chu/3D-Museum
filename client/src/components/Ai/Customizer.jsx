@@ -26,29 +26,45 @@ right: 1rem;
 top: 10rem;
 `;
 
-const Customizer = ({selectedStyle}) => {
+const Customizer = ({ selectedStyle }) => {
 
   console.log("Current style:", selectedStyle);
-  
+
 
   const snap = useSnapshot(state);
 
+  // File
+  const [file, setFile] = useState("");
+
+  // AI
   const [prompt, setPrompt] = useState("");
   const [generatingImg, setGeneratingImg] = useState(false);
   const [imageUrl, setImageUrl] = useState("");
 
   const [activeEditorTab, setActiveEditorTab] = useState("");
 
+
   const generateTabContent = () => {
 
-    return (
-      <AIPicker
-        prompt={prompt}
-        setPrompt={setPrompt}
-        generatingImg={generatingImg}
-        handleSubmit={handleSubmit}
-      />
-    );
+    switch (activeEditorTab) {
+      case "colorpicker":
+        console.log("111")
+        return <ColorPicker />
+      case "filepicker":
+        return <FilePicker />
+      case "aipicker":
+        return <AIPicker
+          prompt={prompt}
+          setPrompt={setPrompt}
+          generatingImg={generatingImg}
+          handleSubmit={handleSubmit}
+        />
+        break;
+      default:
+        return null;
+    }
+
+
   };
 
   const handleSubmit = async (imageStyle) => {
@@ -56,17 +72,17 @@ const Customizer = ({selectedStyle}) => {
     let finalPrompt = prompt;
     console.log(imageStyle);
     switch (selectedStyle) {
-        case "ink":
-            finalPrompt += ", Based on this, integrate ancient Chinese culture, and process this image with Traditional Chinese ink painting style.";
-            break;
-        case "porcelain":
-            finalPrompt += ", Based on this, integrate ancient Chinese culture, and process this image with Traditional Chinese blue and white porcelain pattern style.";
-            break;
-        case "mural":
-            finalPrompt += ", Based on this, integrate ancient Chinese culture, and process this image with Traditional Chinese mural art style.";
-            break;
-        default:
-            finalPrompt += ", Based on this, integrate ancient Chinese culture, and process this image with Traditional Chinese ink painting style."; 
+      case "ink":
+        finalPrompt += ", Based on this, integrate ancient Chinese culture, and process this image with Traditional Chinese ink painting style.";
+        break;
+      case "porcelain":
+        finalPrompt += ", Based on this, integrate ancient Chinese culture, and process this image with Traditional Chinese blue and white porcelain pattern style.";
+        break;
+      case "mural":
+        finalPrompt += ", Based on this, integrate ancient Chinese culture, and process this image with Traditional Chinese mural art style.";
+        break;
+      default:
+        finalPrompt += ", Based on this, integrate ancient Chinese culture, and process this image with Traditional Chinese ink painting style.";
     }
 
 
@@ -77,7 +93,7 @@ const Customizer = ({selectedStyle}) => {
       const webUrl = "https://k-chu.com/api/v1/dalle";
 
       const response = await fetch(webUrl, {
-      // const response = await fetch(localUrl, {
+        // const response = await fetch(localUrl, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -98,7 +114,7 @@ const Customizer = ({selectedStyle}) => {
       setImageUrl(imageUrl); // Update state with new image URL
 
       if (imageStyle === 'logo') {
-        state.isLogoTexture = true;  
+        state.isLogoTexture = true;
         // state.isFullTexture = false;
         state.logoDecal = imageUrl;
       } else {
@@ -106,14 +122,14 @@ const Customizer = ({selectedStyle}) => {
         state.isFullTexture = true;
         state.fullDecal = imageUrl;
       }
-      
-     
-      
+
+
+
     } catch (error) {
       alert(error);
     } finally {
       setGeneratingImg(false);
-      setActiveEditorTab("");
+      // setActiveEditorTab("");
     }
   };
 
@@ -157,26 +173,26 @@ const Customizer = ({selectedStyle}) => {
         {
           // snap.intro &&
           <>
-{/* <div><p>  {selectedStyle.toUpperCase()}</p></div> */}
+            {/* <div><p>  {selectedStyle.toUpperCase()}</p></div> */}
             <motion.div
               key="custom"
-              className="absolute top-0 left-0 z-999"
+              // className="absolute top-0 left-0 z-999 mb-20"
               {...slideAnimation("left")}
             >
               <div className="flex items-center min-h-screen z-999">
                 <div className="editortabs-container tabs">
                   {EditorTabs.map((tab) => (
-                    <Tab key={tab.name} tab={tab} />
+                    <Tab key={tab.name} tab={tab}  isActiveTab={activeEditorTab === tab.name} handleClick={() => setActiveEditorTab(tab.name)}/>
                   ))}
                   {generateTabContent()}
                 </div>
               </div>
             </motion.div>
-            
+
             <Image alt="Generated Image">
-              {imageUrl && <img src={imageUrl} alt="Generated from base64" className="generatedImage"/>}
+              {imageUrl && <img src={imageUrl} alt="Generated from base64" className="generatedImage" />}
             </Image>
-            
+
           </>
         }
       </AnimatePresence>

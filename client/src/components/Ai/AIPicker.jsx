@@ -3,7 +3,7 @@ import React from "react";
 import CustomButton from "./CustomButton";
 
 const AIPicker = (props) => {
-  // console.log(typeof props.handleSubmit);
+  console.log("aipicker");
   return (
     <div className="aipicker-container">
       <textarea

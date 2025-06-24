@@ -1,10 +1,10 @@
 import { swatch, fileIcon, ai, logoShirt, stylishShirt } from "../assets/ai/index";
 
 export const EditorTabs = [
-  // {
-  //   name: "colorpicker",
-  //   icon: swatch,
-  // },
+  {
+    name: "colorpicker",
+    icon: swatch,
+  },
   // {
   //   name: "filepicker",
   //   icon: fileIcon,

@@ -11,11 +11,11 @@ import state from "./store/index";
 
 
 const Section = styled.div``;
-const TextInput = styled.div`
+const UserInput = styled.div`
   height: 30vh;
   position: absolute;
   left: 0px;
-  bottom: 0px;
+  bottom: 2vw;
   z-index: 999;
 `;
 const Container = styled.div`
@@ -129,19 +129,19 @@ const AiIndex = () => {
             </button>
           </div>
 
-          <TextInput>
+          <UserInput>
 
             <Customizer
               selectedStyle={selectedStyle}
               className="absolute z-999"
             />
-          </TextInput>
+          </UserInput>
 
           <CanvasModel
             className="z-10 h-full"
             resetFlag={resetFlag}
           />
-            <p style={{fontSize: '1em'}}> Click to expand / Click and press the shift key to shape</p>
+            <p style={{fontSize: '1em'}}> Click to expand / Click + Shift key to shape</p>
 
           <div className="sketch-picker sticky-md-bottom" style={{width:"min-content"}} >
             {/* <button
