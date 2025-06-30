@@ -87,7 +87,7 @@ const AiIndex = () => {
       <Section className="section">
         <Container className="container">
           <div className="styleSelection">
-            <ul className="list-group" style={{ display: "flex" }}>
+            <ul className="list-group" style={{ display: "flex", alignItems: "center" }}>
               <li className="style_button list-inline-item">
                 <motion.div whileHover={{ scale: 1.2 }}>
                   <CustomButton

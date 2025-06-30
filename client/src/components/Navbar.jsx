@@ -2,7 +2,8 @@ import {React, useState} from "react";
 import styled from "styled-components";
 import { useLocation, useRoute } from "wouter";
 
-import { Drawer,List, ListItem, ListItemText, IconButton } from '@mui/material';
+import { Drawer,List, ListItem, ListItemText, IconButton, Box } from '@mui/material';
+import CloseIcon from '@mui/icons-material/KeyboardDoubleArrowLeftOutlined';
 import MenuIcon from '@mui/icons-material/Menu';
 
 const Section = styled.div`
@@ -13,11 +14,11 @@ const Section = styled.div`
 `;
 
 const Container = styled.div`
-  width: 1400px;
+  // width: 1400px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 10px 0;
+  padding: 1vw 2vw;
 
   @media only screen and (max-width: 768px) {
     display: inline-flex;
@@ -71,8 +72,14 @@ const Navbar = () => {
     setOpen(isOpen);
   };
 
-  const DrawerList = () => (
-    <List>
+  const DrawerList = ({onClose}) => (
+    <>
+         <Box sx={{alignSelf: "flex-end"}}>
+     <IconButton onClick={onClose} sx={{ color: '#fff' }}>
+       <CloseIcon />
+     </IconButton>
+   </Box>
+     <List>
       <ListItem>
         <MenuListItem  component="a" href="/">
           Home
@@ -88,8 +95,10 @@ const Navbar = () => {
           Play with AI
         </MenuListItem>
       </ListItem>
-
     </List>
+
+    </>
+   
   );
 
   return (
@@ -99,8 +108,10 @@ const Navbar = () => {
         <nav id="mobileNavBar" >
           <IconButton
             edge="start"
-            color="inherit"
             aria-label="menu"
+            sx={{color: "#c1c1c1", '&:hover': {
+              color: '#fff', 
+            }}}
             onClick={toggleDrawer(true)}
             className="button"
           >
@@ -108,10 +119,16 @@ const Navbar = () => {
           </IconButton>
           <Drawer anchor="left" open={open} onClose={toggleDrawer(false)}
           sx={{
-            '.MuiDrawer-paper': { width: '80%', maxWidth: 360 },
+            '.MuiDrawer-paper': { width: '80%', maxWidth: 360, 
+            backgroundColor: 'rgba(31, 31, 31, 0.6)',
+            backdropFilter: 'blur(10px)',             
+            WebkitBackdropFilter: 'blur(10px)',      
+            borderRight: '1px solid rgba(255, 255, 255, 0.1)', 
+            boxShadow: '0 4px 30px rgba(0, 0, 0, 0.5)', 
+          },
           }}
           >
-            <DrawerList />
+            <DrawerList onClose={toggleDrawer(false)}/>
           </Drawer>
         </nav>
 
