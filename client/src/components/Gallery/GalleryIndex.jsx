@@ -19,12 +19,12 @@ const Section = styled.div`
 const Container = styled.div`
   height: 90vh;
   flex-direction: column; // corrected spelling mistake from 'coloumn' to 'column'
-  width: 1400px;
+  width: 70vw;
   text-align: center;
   justify-content: space-between;
-  > div {
-    width: 100%;
-  }
+  // > div {
+  //   width: 100vw;
+  // }
 `;
 
 const ModelSpace = styled.div`
@@ -35,12 +35,13 @@ const ModelSpace = styled.div`
   width: 100%;
 
   @media only screen and (max-width: 768px) {
-    display: inline-block !important;
+    // display: block !important;
+    flex-direction: column;
+    margin-top: 45vh;
     > div {
-      display: block !important;
-      height: 80% !important;
-      width: 90% !important;
-      margin-bottom: 50px;
+      // display: block !important;
+      align-self: center;
+      height: 60vh;
     }
   }
 `;
@@ -115,6 +116,7 @@ const GalleryIndex = () => {
   const renderModels = modelResources.map((model, index) => {
     const isModelSelected = params.id === model.name;
     const isIndex = params.id === "GalleryIndex";
+    const isMobile = typeof window !== "undefined" && window.innerWidth < 768; 
     const buttonText = isModelSelected ? "< back" : "Explore >";
     const mode = isModelSelected ? "ModelView" : "CardView";
 
@@ -123,15 +125,17 @@ const GalleryIndex = () => {
     }
 
     let modelJSX;
+    let widthStyle;
+    if (isMobile || !isIndex) {
+      widthStyle = { width: "80%" };
+    } else {
+      widthStyle = { width: `${100 / modelResources.length}%` };
+    }
     if (isIndex || isModelSelected) {
       modelJSX = (
         <div
           key={index}
-          style={
-            isIndex
-              ? { width: `${100 / modelResources.length}%` }
-              : { width: "80%" }
-          }
+          style={widthStyle}
         >
           <Canvas>
             <Card modelName={model.name} index={index} mode={mode} modeLight={modeLight} lightPosition={lightPosition}/>
