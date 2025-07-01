@@ -24,7 +24,7 @@ const Container = styled.div`
   height: 90vh;
 `;
 
-const AiIndex = memo(() => {
+const AiIndex = () => {
 
   // Refs and states
   const [selectedStyle, setSelectedStyle] = useState("ink");
@@ -64,9 +64,11 @@ const AiIndex = memo(() => {
   const handleUpload = () => {
 
     if (mesh) {
-      exportAndUploadGLB(mesh, (modelUrl) => {
-        const arViewerUrl = `${window.location.origin}/ar-viewer?model=${encodeURIComponent(modelUrl)}`;
+      exportAndUploadGLB(mesh, 'customModel', (modelUrl) => {
+        console.log("modelUrl from exportAndUploadGLB callback:", modelUrl);
+        const arViewerUrl = `${window.location.origin}/ar/custom-model-index?model=${encodeURIComponent(modelUrl)}`;
         setQrValue(arViewerUrl);
+        // setQrValue(modelUrl);
         setQrVisible(true);
         console.log(qrVisible)
       });
@@ -202,6 +204,6 @@ const AiIndex = memo(() => {
       </Section>
     </>
   );
-});
+};
 
 export default AiIndex;

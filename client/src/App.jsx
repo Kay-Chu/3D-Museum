@@ -8,7 +8,7 @@ import ARIndex from "./components/AR/ARIndex";
 import styled from "styled-components";
 import StartsCanvas from "./components/StartsCanvas";
 
-import { useLocation, useRoute } from "wouter";
+import { useLocation, useRoute, Route } from "wouter";
 
 import "../index.css";
 import CustomModelIndex from "./components/Ai/ar/CustomModelIndex";
@@ -16,12 +16,13 @@ import CustomModelIndex from "./components/Ai/ar/CustomModelIndex";
 const Container = styled.div``;
 
 const App = () => {
-  const [, setLocation] = useLocation();
+  // const [, setLocation] = useLocation();
 
   const [, galleryMatch] = useRoute("/Gallery/:id");
   const [, aiIndexMatch] = useRoute("/Ai/AiIndex");
 
   const [, arIndexMatch] = useRoute("/AR/ARIndex");
+  const [, arModelViewMatch] = useRoute("/ar/custom-model-index")
 
   return (
     <>
@@ -29,12 +30,15 @@ const App = () => {
     <StartsCanvas className="absolute"/>
       <Container className="w-full h-screen z-999">
       
-        {!galleryMatch && !aiIndexMatch && !arIndexMatch && <Home1 />}
+        {!galleryMatch && !aiIndexMatch && !arIndexMatch && !arModelViewMatch && <Home1 />}
         {galleryMatch && <GalleryIndex />}
         {aiIndexMatch && <AiIndex /> }
 
         {arIndexMatch && <ARIndex /> }
 
+        <Route path="/ar/custom-model-index">
+          <CustomModelIndex />
+        </Route>
       </Container>
 
 
