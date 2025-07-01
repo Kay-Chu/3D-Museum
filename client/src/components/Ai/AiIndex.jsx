@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef, memo } from "react";
 import Navbar from "../Navbar";
 import CanvasModel from "./CanvasModel";
 import styled from "styled-components";
@@ -9,6 +9,8 @@ import { motion } from "framer-motion";
 import Customizer from "./Customizer";
 import state from "./store/index";
 
+import exportAndUploadGLB from "./utils/exportAndUploadGLB";
+import { QRCodeCanvas } from "qrcode.react";
 
 const Section = styled.div``;
 const UserInput = styled.div`
@@ -22,9 +24,15 @@ const Container = styled.div`
   height: 90vh;
 `;
 
-const AiIndex = () => {
+const AiIndex = memo(() => {
+
+  // Refs and states
   const [selectedStyle, setSelectedStyle] = useState("ink");
   const [resetFlag, setResetFlag] = useState(false);
+  const [mesh, setMesh] = useState(null);
+  const [qrVisible, setQrVisible] = useState(false);
+  const [qrValue, setQrValue] = useState('');
+
 
   const handleButtonClick = (style) => {
     setSelectedStyle(style);
@@ -53,7 +61,19 @@ const AiIndex = () => {
     state.isFullTexture = false;
   };
 
+  const handleUpload = () => {
 
+    if (mesh) {
+      exportAndUploadGLB(mesh, (modelUrl) => {
+        const arViewerUrl = `${window.location.origin}/ar-viewer?model=${encodeURIComponent(modelUrl)}`;
+        setQrValue(arViewerUrl);
+        setQrVisible(true);
+        console.log(qrVisible)
+      });
+    } else {
+      console.warn("Mesh not ready");
+    }
+  };
 
   const getButtonProps = (style) => {
     switch (style) {
@@ -137,37 +157,51 @@ const AiIndex = () => {
             />
           </UserInput>
 
+          {qrVisible && (<QRCodeCanvas
+            value={qrValue}
+            size={128}
+            bgColor="#ffffff"
+            fgColor="#000000"
+            level="H" />
+          )}
           <CanvasModel
             className="z-10 h-full"
             resetFlag={resetFlag}
+            onMeshReady={setMesh}
           />
-            <p style={{fontSize: '1em'}}> Click to expand / Click + Shift key to shape</p>
+          <p style={{ fontSize: '1em' }}> Click to expand / Click + Shift key to shape</p>
 
-          <div className="sketch-picker sticky-md-bottom" style={{width:"min-content"}} >
+          <div className="sketch-picker sticky-md-bottom" style={{ width: "min-content" }} >
             {/* <button
               onClick={() => handleFullTexture()}
               style={{ borderRadius: "5rem", display: "flex" }}
             > */}
-              {/* <p style={{fontSize: '1em'}}>FULL</p>
+            {/* <p style={{fontSize: '1em'}}>FULL</p>
             </button> */}
             <button
               onClick={() => handleLogoTexture()}
               style={{ borderRadius: "5rem", display: "flex" }}
             >
               {/* <img className="" src="/img/blue.jpeg" /> */}
-              <p style={{fontSize: '1em'}}>LOGO</p>
+              <p style={{ fontSize: '1em' }}>LOGO</p>
             </button>
             <button
               onClick={() => handleClearTexture()}
               style={{ borderRadius: "5rem", display: "flex" }}
             >
-              <p style={{fontSize: '1em'}}>CLEAR</p>
+              <p style={{ fontSize: '1em' }}>CLEAR</p>
+            </button>
+            <button
+              onClick={handleUpload}
+              style={{ borderRadius: "5rem", display: "flex" }}
+            >
+              <p style={{ fontSize: '1em' }}>AR</p>
             </button>
           </div>
         </Container>
       </Section>
     </>
   );
-};
+});
 
 export default AiIndex;

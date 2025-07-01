@@ -11,6 +11,7 @@ import StartsCanvas from "./components/StartsCanvas";
 import { useLocation, useRoute } from "wouter";
 
 import "../index.css";
+import CustomModelIndex from "./components/Ai/ar/CustomModelIndex";
 
 const Container = styled.div``;
 

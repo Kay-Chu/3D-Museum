@@ -11,6 +11,7 @@ import CustomButton from "../Ai/CustomButton";
 import LightPositionControl from "./LightPositionControl";
 import { motion } from "framer-motion";
 import Slider from "@mui/material/Slider";
+// import QRCode from 'qrcode.react';
 
 const Section = styled.div`
   // scroll-snap-align: center;
@@ -18,7 +19,7 @@ const Section = styled.div`
 
 const Container = styled.div`
   height: 90vh;
-  flex-direction: column; // corrected spelling mistake from 'coloumn' to 'column'
+  flex-direction: column; 
   width: 70vw;
   text-align: center;
   justify-content: space-between;
@@ -35,7 +36,6 @@ const ModelSpace = styled.div`
   width: 100%;
 
   @media only screen and (max-width: 768px) {
-    // display: block !important;
     flex-direction: column;
     margin-top: 45vh;
     > div {

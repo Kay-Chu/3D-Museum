@@ -3,15 +3,13 @@ import { OrbitControls, Box, Environment, Center } from "@react-three/drei";
 import Backdrop from "./Backdrop";
 import CameraRig from "./CameraRig";
 import ModelForAI from "./ModelForAI";
-import { memo, } from "react";
+import { memo, useRef, useEffect, forwardRef } from "react";
 
 
+const CanvasModel = memo(( {resetFlag, onMeshReady} ) => {
 
-const CanvasModel = memo(({ resetFlag, ...props }) => {
   return (
     <>
-      
-
       <Canvas
         shadows
         camera={{ position: [0, 0, 10], fov: 15 }}
@@ -25,8 +23,7 @@ const CanvasModel = memo(({ resetFlag, ...props }) => {
 
         <CameraRig>
         {/* <Backdrop /> */}
-          <ModelForAI resetFlag={resetFlag}/>
-
+          <ModelForAI resetFlag={resetFlag} onMeshReady={onMeshReady}/>
         </CameraRig>
       </Canvas>
     </>

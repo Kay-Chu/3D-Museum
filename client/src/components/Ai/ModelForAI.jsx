@@ -1,4 +1,4 @@
-import { useEffect, useMemo, memo, useRef, useState, useCallback } from "react";
+import { useEffect, useMemo, memo, useRef, useState, useCallback, forwardRef } from "react";
 import { useSnapshot } from "valtio";
 import { useFrame, useThree } from "@react-three/fiber";
 import * as THREE from "three";
@@ -10,7 +10,7 @@ const OPTIMIZATION_SETTINGS = {
   normalUpdateInterval: 5
 };
 
-const ModelForAI = memo((resetFlag, props) => {
+const ModelForAI = memo(({resetFlag, onMeshReady}) => {
 
   // Configs
   const snap = useSnapshot(state);
@@ -353,14 +353,25 @@ const ModelForAI = memo((resetFlag, props) => {
 
   }, []);
 
+  // ======================================
+
+  // ======= Properties controls =======
+
+  useEffect(() => {
+    if (meshRef.current && onMeshReady) {
+      onMeshReady(meshRef.current);
+    }
+  }, [onMeshReady]);
+
   useEffect(() => {
     if (resetFlag) {
       resetGeometry();
     }
   }, [resetFlag]);
 
+  // ======================================
   return (
-    <group {...props}>
+    <group>
       <mesh
         ref={meshRef}
         // geometry={useMemo(() => new THREE.SphereGeometry(1, 64, 64), [])}

@@ -4546,12 +4546,12 @@ void main() {
 `,c_e=or.div`
   height: 90vh;
   flex-direction: column; // corrected spelling mistake from 'coloumn' to 'column'
-  width: 1400px;
+  width: 70vw;
   text-align: center;
   justify-content: space-between;
-  > div {
-    width: 100%;
-  }
+  // > div {
+  //   width: 100vw;
+  // }
 `,u_e=or.div`
   margin-top: 2rem;
   display: flex;
@@ -4560,12 +4560,12 @@ void main() {
   width: 100%;
 
   @media only screen and (max-width: 768px) {
-    display: inline-block !important;
+    flex-direction: column;
+    margin-top: 45vh;
     > div {
-      display: block !important;
-      height: 80% !important;
-      width: 90% !important;
-      margin-bottom: 50px;
+      // display: block !important;
+      align-self: center;
+      height: 60vh;
     }
   }
 `,f_e=or.div`
@@ -4604,7 +4604,7 @@ void main() {
       background-color: currentColor;
     }
   }
-`,h_e=or.button``,p_e=()=>{const t=[{name:"Vase",title:"Jade Hall"},{name:"Chinese_temple",title:"Porcelain Hall"},{name:"Buddha_statues",title:"Handicrafts Hall"}],[e,n]=L.useState(null),[r,i]=L.useState(1),[s,o]=L.useState([3,2,1]),a=y=>{n(y)},l=()=>{n(null)},c=(y,_)=>{i(_)},[u,f]=CP(),[,d]=kg("/Gallery/:id"),p=d.id==="GalleryIndex",g=t.map((y,_)=>{const v=d.id===y.name,x=d.id==="GalleryIndex",S=v?"< back":"Explore >",A=v?"ModelView":"CardView";if(e!==null&&y.name!==e)return null;let E;return(x||v)&&(E=Dt("div",{style:x?{width:`${100/t.length}%`}:{width:"80%"},children:[se(Db,{children:se(F1e,{modelName:y.name,index:_,mode:A,modeLight:r,lightPosition:s})}),se(h_e,{className:"button",id:y.name,onClick:()=>{d.id==="GalleryIndex"?f("/Gallery/"+String(y.name)):f("/Gallery/GalleryIndex")},children:se("span",{children:S})})]},_)),E});return Dt(li,{children:[se(iI,{}),Dt(l_e,{className:"section fullHeight",children:[!p&&Dt(f_e,{children:[se("label",{children:"Light"}),se(d_e,{value:r,onChange:c,"aria-labelledby":"continuous-slider",min:-2,max:4,step:.1}),se(a_e,{lightPosition:s,onChange:o})]}),se("div",{children:Dt("ul",{className:"list-group",style:{color:"#ffffff",display:"inline-flex"},children:[se("li",{className:"list-inline-item",children:se(Uc.div,{whileHover:{scale:1.2},children:se(bf,{type:"filled",title:"All",handleClick:l})})}),t.map(y=>se("li",{className:"list-inline-item",children:se(Uc.div,{whileHover:{scale:1.2},children:se(bf,{type:"filled",title:y.title,handleClick:()=>a(y.name)})})},y.name))]})}),se(c_e,{className:"container",children:se(u_e,{children:g})})]})]})},m_e=({children:t})=>{const{camera:e}=bn(),n=L.useRef();return Dt(li,{children:[se(H$,{args:[e]}),se("group",{ref:n,children:t})]})},ig={cylinderSegments:64,layerStep:.2,normalUpdateInterval:5},g_e=L.memo((t,e)=>{const n=Cv(gs),{camera:r,gl:i}=bn(),s=L.useMemo(()=>{const O=new zf(.7,.7,2,ig.cylinderSegments,ig.cylinderSegments,!1),z=O.attributes.position,G=1e-5,Y=new Map,W=new Map,q=.01;for(let F=0;F<z.count;F++){const X=new K().fromBufferAttribute(z,F),$=`${Math.floor(X.x/q)},${Math.floor(X.y/q)},${Math.floor(X.z/q)}`;W.has($)||W.set($,[]);const V=W.get($);for(const Q of V){const le=new K().fromBufferAttribute(z,Q);X.distanceTo(le)<G&&(Y.has(F)||Y.set(F,[]),Y.get(F).push(Q))}V.push(F)}O.userData.layers=new Map;for(let F=0;F<z.count;F++){const X=z.getY(F),$=Math.round(X/ig.layerStep);O.userData.layers.has($)||O.userData.layers.set($,[]),O.userData.layers.get($).push(F)}return O.userData.duplicateMap=Y,O},[]),o=L.useRef(),a=L.useRef(null),l=L.useRef(null),c=L.useRef(0),u=L.useMemo(()=>new Ev,[]),f=L.useMemo(()=>new Xe,[]),[d,p]=L.useState(!1),[g,y]=L.useState(null),_=.3,[v,x]=L.useState({x:.5,y:.5,size:.5}),S=L.useMemo(()=>n.fullDecal?new xp().load(n.fullDecal):null,[n.fullDecal]),A=L.useMemo(()=>{if(!n.logoDecal)return null;const O=new xp().load(n.logoDecal);return O.encoding=void 0,O},[n.logoDecal]),E=L.useMemo(()=>{const O=document.createElement("canvas");O.width=O.height=2;const z=O.getContext("2d");return z&&(z.fillStyle=n.color,z.fillRect(0,0,2,2)),new t9(O)},[n.color]),T=L.useMemo(()=>A?new Cr({uniforms:{baseMap:{value:E},logoMap:{value:A},logoPosition:{value:new Xe(v.x,v.y)},logoSize:{value:v.size},opacity:{value:.5},lightPosition:{value:new K(0,5,10)},lightColor:{value:new ft(16777215)},ambientColor:{value:new ft(4210752)},specularPower:{value:30},specularIntensity:{value:.5},envMap:{value:null},reflectivity:{value:.2}},vertexShader:`
+`,h_e=or.button``,p_e=()=>{const t=[{name:"Vase",title:"Jade Hall"},{name:"Chinese_temple",title:"Porcelain Hall"},{name:"Buddha_statues",title:"Handicrafts Hall"}],[e,n]=L.useState(null),[r,i]=L.useState(1),[s,o]=L.useState([3,2,1]),a=y=>{n(y)},l=()=>{n(null)},c=(y,_)=>{i(_)},[u,f]=CP(),[,d]=kg("/Gallery/:id"),p=d.id==="GalleryIndex",g=t.map((y,_)=>{const v=d.id===y.name,x=d.id==="GalleryIndex",S=typeof window<"u"&&window.innerWidth<768,A=v?"< back":"Explore >",E=v?"ModelView":"CardView";if(e!==null&&y.name!==e)return null;let T,M;return S||!x?M={width:"80%"}:M={width:`${100/t.length}%`},(x||v)&&(T=Dt("div",{style:M,children:[se(Db,{children:se(F1e,{modelName:y.name,index:_,mode:E,modeLight:r,lightPosition:s})}),se(h_e,{className:"button",id:y.name,onClick:()=>{d.id==="GalleryIndex"?f("/Gallery/"+String(y.name)):f("/Gallery/GalleryIndex")},children:se("span",{children:A})})]},_)),T});return Dt(li,{children:[se(iI,{}),Dt(l_e,{className:"section fullHeight",children:[!p&&Dt(f_e,{children:[se("label",{children:"Light"}),se(d_e,{value:r,onChange:c,"aria-labelledby":"continuous-slider",min:-2,max:4,step:.1}),se(a_e,{lightPosition:s,onChange:o})]}),se("div",{children:Dt("ul",{className:"list-group",style:{color:"#ffffff",display:"inline-flex"},children:[se("li",{className:"list-inline-item",children:se(Uc.div,{whileHover:{scale:1.2},children:se(bf,{type:"filled",title:"All",handleClick:l})})}),t.map(y=>se("li",{className:"list-inline-item",children:se(Uc.div,{whileHover:{scale:1.2},children:se(bf,{type:"filled",title:y.title,handleClick:()=>a(y.name)})})},y.name))]})}),se(c_e,{className:"container",children:se(u_e,{children:g})})]})]})},m_e=({children:t})=>{const{camera:e}=bn(),n=L.useRef();return Dt(li,{children:[se(H$,{args:[e]}),se("group",{ref:n,children:t})]})},ig={cylinderSegments:64,layerStep:.2,normalUpdateInterval:5},g_e=L.memo((t,e)=>{const n=Cv(gs),{camera:r,gl:i}=bn(),s=L.useMemo(()=>{const O=new zf(.7,.7,2,ig.cylinderSegments,ig.cylinderSegments,!1),z=O.attributes.position,G=1e-5,Y=new Map,W=new Map,q=.01;for(let F=0;F<z.count;F++){const X=new K().fromBufferAttribute(z,F),$=`${Math.floor(X.x/q)},${Math.floor(X.y/q)},${Math.floor(X.z/q)}`;W.has($)||W.set($,[]);const V=W.get($);for(const Q of V){const le=new K().fromBufferAttribute(z,Q);X.distanceTo(le)<G&&(Y.has(F)||Y.set(F,[]),Y.get(F).push(Q))}V.push(F)}O.userData.layers=new Map;for(let F=0;F<z.count;F++){const X=z.getY(F),$=Math.round(X/ig.layerStep);O.userData.layers.has($)||O.userData.layers.set($,[]),O.userData.layers.get($).push(F)}return O.userData.duplicateMap=Y,O},[]),o=L.useRef(),a=L.useRef(null),l=L.useRef(null),c=L.useRef(0),u=L.useMemo(()=>new Ev,[]),f=L.useMemo(()=>new Xe,[]),[d,p]=L.useState(!1),[g,y]=L.useState(null),_=.3,[v,x]=L.useState({x:.5,y:.5,size:.5}),S=L.useMemo(()=>n.fullDecal?new xp().load(n.fullDecal):null,[n.fullDecal]),A=L.useMemo(()=>{if(!n.logoDecal)return null;const O=new xp().load(n.logoDecal);return O.encoding=void 0,O},[n.logoDecal]),E=L.useMemo(()=>{const O=document.createElement("canvas");O.width=O.height=2;const z=O.getContext("2d");return z&&(z.fillStyle=n.color,z.fillRect(0,0,2,2)),new t9(O)},[n.color]),T=L.useMemo(()=>A?new Cr({uniforms:{baseMap:{value:E},logoMap:{value:A},logoPosition:{value:new Xe(v.x,v.y)},logoSize:{value:v.size},opacity:{value:.5},lightPosition:{value:new K(0,5,10)},lightColor:{value:new ft(16777215)},ambientColor:{value:new ft(4210752)},specularPower:{value:30},specularIntensity:{value:.5},envMap:{value:null},reflectivity:{value:.2}},vertexShader:`
       uniform mat4 shadowMatrix;
       varying vec4 vShadowCoord;
       varying vec3 vNormal;

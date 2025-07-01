@@ -4,14 +4,24 @@ import * as dotenv from 'dotenv';
 import cors from 'cors';
 
 import dalleRoutes from './routes/dalle.routes.js';
+import uploadRoutes from './routes/uploadRoute.js';
 
 dotenv.config();
 
 const app = express();
-app.use(cors());
-app.use(express.json({limig:"50mb"}));
+app.use(cors({
+    origin: process.env.CORS_ORIGIN || 'http://localhost:5173',
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    allowedHeaders: ['Content-Type'],
+  }));
+  
+  
+app.use(express.json({limit:"50mb"}));
+
+app.use('/ar', express.static('public/ar'));
 
 app.use('/api/v1/dalle', dalleRoutes);
+app.use('/api/v1/upload', uploadRoutes);
 
 app.get('/', (req, res)=>{
     res.status(200).json({message:"Hello from dalle"})
