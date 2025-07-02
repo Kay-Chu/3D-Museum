@@ -6,7 +6,6 @@ import fs from 'fs';
 const router = express.Router();
 
 const UPLOAD_DIR = process.env.FILE_UPLOAD_DIR || 'public/ar';
-const BASE_URL = process.env.BASE_URL || 'http://localhost:8081';
 
 // Set storage location
 const storage = multer.diskStorage({
@@ -27,7 +26,7 @@ router.post('/', upload.single('model'), (req, res) => {
   if (!req.file) {
     return res.status(400).json({ message: 'No file uploaded' });
   }
-  const fileUrl = `${process.env.BASE_URL}/ar/customModel.glb`;
+  const fileUrl = `${process.env.BASE_URL}/api/ar/customModel.glb`;
   res.status(200).json({ message: 'Upload successful', url: fileUrl });
 });
 

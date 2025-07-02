@@ -18,7 +18,7 @@ app.use(cors({
   
 app.use(express.json({limit:"50mb"}));
 
-app.use('/ar', express.static('public/ar'));
+app.use('/api/ar', express.static('public/ar'));
 
 app.use('/api/v1/dalle', dalleRoutes);
 app.use('/api/v1/upload', uploadRoutes);
