@@ -1,6 +1,6 @@
 const config = {
   development: {
-    backendUrl: "https://k-chu.com/api/v1/dalle",
+    backendUrl: "https://museum.k-chu.com/api/v1/dalle",
     // backendUrl: "http://localhost:8081/api/v1/dalle",
   },
   production: {
